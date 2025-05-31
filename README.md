@@ -1,5 +1,5 @@
 # semsteraufgabe
-Verleih-System\n
+Verleih-System              
 Es soll ein Verleihsystem f¨ur eine Studierendenvertretung erstellt werden. In dem System sollen verschiedene
 Daten (bei Gegenst¨anden Inventarnummer, Bezeichnung, Anzahl, Zustand auf einer Skala
 von 1-5, Verleihbarkeit, Serien-/Modellnummer, Kommentar; bei Schl¨usseln Schl¨usselnummer, wof¨ur der
