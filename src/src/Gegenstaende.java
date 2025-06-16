@@ -3,6 +3,7 @@ public class Gegenstaende {
         int id;
         int number;
         boolean lendability;
-        int modellNumber;
+        int modNumber;
         String kommentar;
+
 }
