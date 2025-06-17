@@ -58,7 +58,7 @@ public class Student {
 // Container class
 // remove Student
 // remove address
-// privat  void updat List for ausdrucken
+// privat  void up date List for ausdrucken
 // publi interator <Interator>
 
 
