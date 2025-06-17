@@ -3,10 +3,10 @@ public class Student {
     String eMail;                      // wird als Eindeutige ID verwendet, d.h. wir nur  ein mal vergeben
     String firstName;
     String lastName;
-    Adress address;
+    Address address;
     String phoneNumber;
 
-    Student(String eMail, String firstName, String lastName, Adress address, String phoneNumber) {
+    Student(String eMail, String firstName, String lastName, Address address, String phoneNumber) {
         this.eMail = eMail;
         this.firstName = firstName;
         this.lastName= lastName;
@@ -33,10 +33,10 @@ public class Student {
     public void setLastname(String lastname) {
         this.lastName = lastname;
     }
-    public Adress getAddress() {
+    public Address getAddress() {
         return address;
     }
-    public void setAddress(Adress address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
     public String getPhoneNumber() {
