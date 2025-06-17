@@ -3,7 +3,7 @@ public class TestalleProgramme {
 
         System.out.println("\nProgramm laeuft");
 
-        Address A1 = new Address(" BaumStr.", 13, 55672, "Auxburg");
+        Address A1 = new Address(" BaumStr.", "13 f", 55672, "Auxburg");
         Student S1 = new Student( "www.TimHuber@gmx.de", "Tim","Huber", A1, "+49 111 235 874" );
 
 

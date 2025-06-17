@@ -1,10 +1,10 @@
 public class Address {
     private String road;
-    private int houseNumber;
+    private String houseNumber;
     private int postCode;
     private String city;
 
-    public Address(String road, int houseNumber, int postCode, String city) {
+    public Address(String road, String houseNumber, int postCode, String city) {
         this.road = road;
         this.houseNumber = houseNumber;
         this.postCode = postCode;
@@ -16,10 +16,10 @@ public class Address {
     public void setRoad(String road) {
         this.road = road;
     }
-    public int getHouseNumber() {
+    public String getHouseNumber() {
         return houseNumber;
     }
-    public void setHouseNumber(int houseNumber) {
+    public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
     }
     public int getPostCode() {
@@ -37,6 +37,6 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Adress: " + road + ", " + houseNumber + "; " + postCode + " " + city + "\n";
+        return road + " " + houseNumber + "; " + postCode + " " + city + "\n";
     }
 }
