@@ -53,3 +53,13 @@ public class Student {
     }
 
 }
+
+
+// Container class:
+// remove Student
+// remove address
+
+
+// in classentest aud vollstaendige Strings
+
+// equal test für die Mail adresse
