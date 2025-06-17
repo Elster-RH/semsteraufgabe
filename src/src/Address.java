@@ -10,6 +10,8 @@ public class Address {
         this.postCode = postCode;
         this.city = city;
     }
+
+    /*
     public String getRoad() {
         return road;
     }
@@ -34,7 +36,7 @@ public class Address {
     public void setCity(String city) {
         this.city = city;
     }
-
+    */
     @Override
     public String toString() {
         return road + " " + houseNumber + "; " + postCode + " " + city + "\n";
