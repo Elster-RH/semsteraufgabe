@@ -58,6 +58,8 @@ public class Student {
 // Container class:
 // remove Student
 // remove address
+// privat  void updat List for ausdrucken
+// publi interator <Interator>
 
 
 // in classentest aud vollstaendige Strings
