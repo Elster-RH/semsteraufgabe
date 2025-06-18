@@ -1,10 +1,10 @@
 public class Address {
     private String road;
     private String houseNumber;
-    private int postCode;
+    private String postCode;
     private String city;
 
-    public Address(String road, String houseNumber, int postCode, String city) {
+    public Address(String road, String houseNumber, String postCode, String city) {
         this.road = road;
         this.houseNumber = houseNumber;
         this.postCode = postCode;

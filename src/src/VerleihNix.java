@@ -20,7 +20,7 @@ public class VerleihNix extends JFrame {
             dispose();
         });
         button1.addActionListener(e -> {
-            addStudent student = new addStudent(this);
+            addStudent student = new addStudent(this, new StudentContainer());
             student.setVisible(true);
         });
 

@@ -2,8 +2,24 @@ import javax.swing.*;
 import java.awt.*;
 
 public class addStudent extends JDialog {
-    public addStudent(JFrame parent) {
+
+    private Student student;
+    private Address address;
+    private StudentContainer container;
+
+    private JTextField name ;
+    private JTextField lastName;
+    private JTextField email;
+    private JTextField phoneNumber;
+    private JTextField road;
+    private JTextField city;
+    private JTextField houseNumber;
+    private JTextField postalCode;
+
+
+    public addStudent(JFrame parent, StudentContainer container) {
         super(parent, "Student hinzufügen", true);
+        this.container = container;
 
         setSize(500, 250);
 
@@ -20,32 +36,40 @@ public class addStudent extends JDialog {
         JLabel studentEmail = new JLabel("Email:");
         JLabel studentPhone = new JLabel("Telefonnummer:");
 
-        JLabel address1 = new JLabel("Strasse:");
-        JLabel address2 = new JLabel("Hausnummer:");
-        JLabel address3 = new JLabel("PLZ:");
-        JLabel address4 = new JLabel("Stadt:");
+        JLabel roadLabel = new JLabel("Strasse:");
+        JLabel houseNumberLabel = new JLabel("Hausnummer:");
+        JLabel postalCodeLabel = new JLabel("PLZ:");
+        JLabel cityLabel = new JLabel("Stadt:");
 
 
 
 
-        addressPanel.add(address1);
-        addressPanel.add(new JTextField(20));
-        addressPanel.add(address2);
-        addressPanel.add(new JTextField(20));
-        addressPanel.add(address3);
-        addressPanel.add(new JTextField(20));
-        addressPanel.add(address4);
-        addressPanel.add(new JTextField(20));
+        addressPanel.add(roadLabel);
+        road = new JTextField(20);
+        addressPanel.add(road);
+        addressPanel.add(houseNumberLabel);
+        houseNumber = new JTextField(20);
+        addressPanel.add(houseNumber);
+        addressPanel.add(postalCodeLabel);
+        postalCode =  new JTextField(20);
+        addressPanel.add(postalCode);
+        addressPanel.add(cityLabel);
+        city = new JTextField(20);
+        addressPanel.add(city);
 
 
         studentPanel.add(studentName);
-        studentPanel.add(new JTextField(20));
+        name = new JTextField(20);
+        studentPanel.add(name);
         studentPanel.add(studentName2);
-        studentPanel.add(new JTextField(20));
+        lastName = new JTextField(20);
+        studentPanel.add(lastName);
         studentPanel.add(studentEmail);
-        studentPanel.add(new JTextField(30));
+        email = new JTextField(20);
+        studentPanel.add(email);
         studentPanel.add(studentPhone);
-        studentPanel.add(new JTextField(20));
+        phoneNumber = new JTextField(20);
+        studentPanel.add(phoneNumber);
 
 
         JButton addButton = new JButton("Student hinzufügen");
@@ -57,10 +81,42 @@ public class addStudent extends JDialog {
         cancelButton.addActionListener(e -> {
             dispose();
         });
+        addButton.addActionListener(e -> {
+            save();
+        });
+        removeButton.addActionListener(e -> {
+            for(Student jay : container)
+            System.out.println(jay);
+        });
 
         add(studentPanel, BorderLayout.NORTH);
         add(buttonPanel, BorderLayout.SOUTH);
         add(addressPanel, BorderLayout.CENTER);
+    }
+
+    private void save() {
+
+        address = new Address(road.getText(), houseNumber.getText(), postalCode.getText(),
+                city.getText());
+
+        student = new Student(email.getText(), name.getText(), lastName.getText(), address, phoneNumber.getText());
+
+        container.addStudent(student);
+
+        clear();
+
+    }
+
+    private void clear() {
+        name.setText("");
+        lastName.setText("");
+        email.setText("");
+        phoneNumber.setText("");
+        road.setText("");
+        city.setText("");
+        houseNumber.setText("");
+        postalCode.setText("");
+
     }
 
 }

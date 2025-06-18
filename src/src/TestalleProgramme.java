@@ -3,7 +3,7 @@ public class TestalleProgramme {
 
         System.out.println("\nProgramm laeuft");
 
-        Address A1 = new Address(" BaumStr.", "13 f", 55672, "Auxburg");
+        /*Address A1 = new Address(" BaumStr.", "13 f", 55672, "Auxburg");
         Address A2 = new Address(" AllehausStr.", "1", 58670, "Auxburg");
         Address A3 = new Address(" HausStr.", "122", 02670, "Friedburg");
         Student S1 = new Student( "www.TimHuber@gmx.de", "Tim","Huber", (new Address(" BaumStr.", "13 f", 55672, "Auxburg")) , "+49 111 235 874" );
@@ -17,6 +17,6 @@ public class TestalleProgramme {
         container.addStudent(S1);
         container.addStudent(S2);
 
-        container.printAllStudents();
+        container.printAllStudents();*/
     }
 }
