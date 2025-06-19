@@ -6,7 +6,7 @@ public class Student {
     Address address;
     String phoneNumber;
 
-    Student(String eMail, String firstName, String lastName, Address address, String phoneNumber) {
+    Student(String eMail, String firstName, String lastName, String phoneNumber, Address address) {
         this.eMail = eMail;
         this.firstName = firstName;
         this.lastName= lastName;
@@ -48,8 +48,8 @@ public class Student {
 
     @Override
     public String toString() {
-        return  "\n Student: " + lastName + " " + firstName + "\n eMail: "
-                + eMail + " \n Anschrift: " + address + " \n Mobilfunk Nummer : " + phoneNumber;
+        return  address + "\n" + eMail + "\n" + firstName  + "\n" + lastName
+                 + " \n" +  phoneNumber +"\n";
     }
 
 }

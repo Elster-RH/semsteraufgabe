@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class addStudent extends JDialog {
 
@@ -82,7 +84,11 @@ public class addStudent extends JDialog {
             dispose();
         });
         addButton.addActionListener(e -> {
-            save();
+            try {
+                save();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         removeButton.addActionListener(e -> {
             for(Student jay : container)
@@ -94,14 +100,21 @@ public class addStudent extends JDialog {
         add(addressPanel, BorderLayout.CENTER);
     }
 
-    private void save() {
+    private void save() throws IOException {
 
         address = new Address(road.getText(), houseNumber.getText(), postalCode.getText(),
                 city.getText());
 
-        student = new Student(email.getText(), name.getText(), lastName.getText(), address, phoneNumber.getText());
+        student = new Student(email.getText(), name.getText(), lastName.getText(), phoneNumber.getText(), address);
 
         container.addStudent(student);
+
+        try(FileWriter wirter = new FileWriter("Student.csv", true)) {
+
+            wirter.write(student.toString());
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
 
         clear();
 

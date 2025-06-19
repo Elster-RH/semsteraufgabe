@@ -1,9 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class VerleihNix extends JFrame {
 
-    public VerleihNix() {
+
+
+    public VerleihNix(StudentContainer container) {
 
         setTitle("VerleihNix");
         setSize(600, 600);
@@ -20,7 +25,7 @@ public class VerleihNix extends JFrame {
             dispose();
         });
         button1.addActionListener(e -> {
-            addStudent student = new addStudent(this, new StudentContainer());
+            addStudent student = new addStudent(this, container);
             student.setVisible(true);
         });
 
@@ -31,8 +36,27 @@ public class VerleihNix extends JFrame {
 
     }
 
-    public static void main(String[] args) {
 
-        new VerleihNix();
+
+    public static void main(String[] args) throws FileNotFoundException {
+
+        StudentContainer container = new StudentContainer();
+
+
+        try(Scanner input = new Scanner(new File("Student.csv"))){
+            while (input.hasNextLine()) {
+                Address address = new Address(input.nextLine(), input.nextLine(), input.nextLine(), input.nextLine());
+                Student student = new Student(input.nextLine(), input.nextLine(), input.nextLine(), input.nextLine(), address);
+                container.addStudent(student);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        new VerleihNix(container);
     }
 }
