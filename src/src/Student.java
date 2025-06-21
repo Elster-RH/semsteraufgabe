@@ -1,13 +1,13 @@
 public class Student {
 
-    String eMail;                      // wird als Eindeutige ID verwendet, d.h. wir nur  ein mal vergeben
-    String firstName;
-    String lastName;
-    Address address;
-    String phoneNumber;
+    private String eMail;                      // wird als Eindeutige ID verwendet, d.h. wir nur  ein mal vergeben
+    private String firstName;
+    private String lastName;
+    private Address address;
+    private String phoneNumber;
 
     Student(String eMail, String firstName, String lastName, String phoneNumber, Address address) {
-        this.eMail = eMail;
+        seteMail(eMail);
         this.firstName = firstName;
         this.lastName= lastName;
         this.address = address;
@@ -18,7 +18,10 @@ public class Student {
     public String geteMail() {
         return eMail;
     }
-    public void seteMail(String eMail) {
+    public void seteMail(String eMail) throws RentalSystemException.InvalidFormatEmail{
+        if (!eMail.contains("@")) {
+            throw new RentalSystemException.InvalidFormatEmail();
+        }
         this.eMail = eMail;
     }
     public String getFirstName() {
@@ -27,10 +30,10 @@ public class Student {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    public String getLastname() {
+    public String getLastName() {
         return lastName;
     }
-    public void setLastname(String lastname) {
+    public void setLastName(String lastname) {
         this.lastName = lastname;
     }
     public Address getAddress() {
