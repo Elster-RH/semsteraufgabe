@@ -8,9 +8,25 @@ public class Student {
 
     Student(String eMail, String firstName, String lastName, String phoneNumber, Address address) {
         seteMail(eMail);
+
+        if (firstName == null || firstName.isEmpty()) {
+            throw new RentalSystemException.EmptyField();
+        }
         this.firstName = firstName;
+
+        if (lastName == null || lastName.isEmpty()) {
+            throw new RentalSystemException.EmptyField();
+        }
         this.lastName= lastName;
+
+        if (address == null ) {
+            throw new RentalSystemException.EmptyField();
+        }
         this.address = address;
+
+        if (phoneNumber == null || phoneNumber.isEmpty()) {
+            throw new RentalSystemException.EmptyField();
+        }
         this.phoneNumber = phoneNumber;
 
     }
@@ -57,14 +73,3 @@ public class Student {
 
 }
 
-
-// Container class
-// remove Student
-// remove address
-// privat  void up date List for ausdrucken
-// publi interator <Interator>
-
-
-// in classentest aud vollstaendige Strings
-
-// equal test für die Mail adresse
