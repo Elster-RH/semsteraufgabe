@@ -19,6 +19,7 @@ public class StudentContainer implements  Iterable<Student>{
                 throw new RentalSystemException.EmailAlreadyExists();
             }
         }
+
         allStudents.add(student);
     }
 

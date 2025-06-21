@@ -20,6 +20,7 @@ public class RentalSystemException extends Exception {
             super("Pflichtfeld, Eingabe erforderlich");                  // für alle leeren Felder
         }
     }
+
     static class EMailNotFound extends RentalSystemException {
         public EMailNotFound() {
             super("E-Mail nicht gefunden.");

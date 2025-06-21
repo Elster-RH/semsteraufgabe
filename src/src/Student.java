@@ -1,3 +1,4 @@
+
 public class Student {
 
     private String eMail;                      // wird als Eindeutige ID verwendet, d.h. wir nur  ein mal vergeben
