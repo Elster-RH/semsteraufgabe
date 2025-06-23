@@ -7,7 +7,8 @@ public class Student {
     private Address address;
     private String phoneNumber;
 
-    Student(String eMail, String firstName, String lastName, String phoneNumber, Address address) {
+    public Student (String eMail, String firstName, String lastName, String phoneNumber, Address address) throws RentalSystemException {
+
         seteMail(eMail);
 
         if (firstName == null || firstName.isEmpty()) {

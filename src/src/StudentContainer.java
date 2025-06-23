@@ -14,14 +14,10 @@ public class StudentContainer implements  Iterable<Student>{
     }
 
     public void addStudent(Student student) {
-        for (Student s : allStudents) {
-            if (s.geteMail().equalsIgnoreCase(student.geteMail())) {
-                throw new RentalSystemException.EmailAlreadyExists();
-            }
-        }
 
         allStudents.add(student);
     }
+
 
     public boolean removeStudent(String email) {
         Iterator<Student> y = allStudents.iterator();

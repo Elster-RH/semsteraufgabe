@@ -25,6 +25,7 @@ public class addStudent extends JDialog {
 
         setSize(500, 250);
 
+
         JPanel buttonPanel = new JPanel();
         JPanel studentPanel = new JPanel();
         JPanel addressPanel = new JPanel();
@@ -87,7 +88,9 @@ public class addStudent extends JDialog {
             try {
                 save();
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                ex.printStackTrace();
+            } catch (RentalSystemException ex) {
+                ex.getMessage();
             }
         });
         removeButton.addActionListener(e -> {
@@ -100,7 +103,7 @@ public class addStudent extends JDialog {
         add(addressPanel, BorderLayout.CENTER);
     }
 
-    private void save() throws IOException {
+    private void save() throws IOException, RentalSystemException {
 
         address = new Address(road.getText(), houseNumber.getText(), postalCode.getText(),
                 city.getText());
@@ -108,6 +111,9 @@ public class addStudent extends JDialog {
         student = new Student(email.getText(), name.getText(), lastName.getText(), phoneNumber.getText(), address);
 
         container.addStudent(student);
+
+
+
 
         try(FileWriter wirter = new FileWriter("Student.csv", true)) {
 

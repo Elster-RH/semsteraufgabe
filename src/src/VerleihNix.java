@@ -12,7 +12,7 @@ public class VerleihNix extends JFrame {
 
         setTitle("VerleihNix");
         setSize(600, 600);
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel buttonPanel = new JPanel();
         JButton button1 = new JButton("Student hinzufügen");
         JButton button2 = new JButton("Objekt hinzufügen");
@@ -38,7 +38,7 @@ public class VerleihNix extends JFrame {
 
 
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
 
         StudentContainer container = new StudentContainer();
 
@@ -51,6 +51,8 @@ public class VerleihNix extends JFrame {
             }
 
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (RentalSystemException e) {
             e.printStackTrace();
         }
 
