@@ -1,9 +1,29 @@
 public class Gegenstaende {
-        String bezeichnung;
         int id;
-        int number;
-        boolean lendability;
-        int modNumber;
         String kommentar;
 
+        public Gegenstaende(int id, String kommentar){
+        setid(id);
+        setkommentar(kommentar);
+        getid();
+        getkommentar(); 
+        }
+
+        
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setKommentar(String kommentar) {
+        this.kommentar = kommentar;
+    }
+
+    public String getKommentar() {
+        return kommentar;
+    }
+        
 }
