@@ -4,7 +4,7 @@ public class Address {
     private String postCode;
     private String city;
 
-    public Address(String road, String houseNumber, String postCode, String city) {
+    public Address(String road, String houseNumber, String postCode, String city) throws RentalSystemException {
         this.road = road;
         this.houseNumber = houseNumber;
         this.postCode = postCode;

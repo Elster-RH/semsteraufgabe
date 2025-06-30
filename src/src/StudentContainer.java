@@ -14,7 +14,6 @@ public class StudentContainer implements  Iterable<Student>{
     }
 
     public void addStudent(Student student) {
-
         allStudents.add(student);
     }
 

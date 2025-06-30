@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 public class VerleihNix extends JFrame {
 
-
-
     public VerleihNix(StudentContainer container) {
 
         setTitle("VerleihNix");
@@ -36,8 +34,6 @@ public class VerleihNix extends JFrame {
 
     }
 
-
-
     public static void main(String[] args) {
 
         StudentContainer container = new StudentContainer();
@@ -55,8 +51,6 @@ public class VerleihNix extends JFrame {
         } catch (RentalSystemException e) {
             e.printStackTrace();
         }
-
-
 
 
         new VerleihNix(container);
