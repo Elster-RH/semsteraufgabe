@@ -5,11 +5,17 @@ public class Buch extends Gegenstaende {
   boolean lendability;
   int modNumber;
   int condition;
-  int Buchid;
-  
-  public Buch(int id, String kommentar, String bezeichnung, int amount, boolean lendability, int modNumber, int condition, int buchid) {
-        super(id, kommentar); 
+  int buchid;
+
+  public Buch(int id, String kommentar, String bezeichnung, int amount, boolean lendability, int modNumber, int condition, int buchid) throws RentalSystemException.EmptyField {
+        super(id, kommentar);
+      if (bezeichnung == null || bezeichnung.isEmpty()) {
+          throw new RentalSystemException.EmptyField();
+      }
         setBezeichnung(bezeichnung);
+      if (amount == 0) {
+          throw new RentalSystemException.EmptyField();
+      }
         setAmount(amount);
         setLendability(lendability);
         setModNumber(modNumber);
@@ -43,7 +49,7 @@ public class Buch extends Gegenstaende {
         this.lendability = lendability;
     }
 
-    public boolean isLendability() {
+    public boolean getLendability() {
         return lendability;
     }
 
@@ -72,4 +78,4 @@ public class Buch extends Gegenstaende {
     }
 }
 
-}
+

@@ -1,5 +1,8 @@
 public class Schluessel extends Gegenstaende {
-  int SchluesselId; 
+
+  int SchluesselId;
   String associatedTo;
+
+
   
 }

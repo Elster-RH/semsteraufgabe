@@ -1,30 +1,42 @@
 public abstract class Gegenstaende {
-        pivate int vorherigeid = 0;
+        private static int vorherigeId = 0;
         int id;
         String kommentar;
 
-        public Gegenstaende(int id, String kommentar){
-        setid(id);
+        public Gegenstaende(int id, String kommentar) {
+        setId();
+
         setkommentar(kommentar);
-        getid();
+
+        getId();
         getkommentar(); 
         }
 
-        
-    public void setId(int id) {
-        this.id = naechsteId++;;
+    public static void setvorherigeId(int alteId){
+            if(vorherigeId < alteId){
+                vorherigeId = alteId;
+
+            }
+
+    }
+
+    public static int getvorherigeId(){
+            return vorherigeId;
+    }
+
+    public void setId() {
+        this.id = vorherigeId++;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setKommentar(String kommentar) {
-        this.kommentar = kommentar;
-    }
-
-    public String getKommentar() {
+    public String getkommentar() {
         return kommentar;
     }
-        
+
+    public void setkommentar(String kommentar) {
+        this.kommentar = kommentar;
+    }
 }
