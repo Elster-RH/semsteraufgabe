@@ -1,4 +1,5 @@
-public class Gegenstaende {
+public abstract class Gegenstaende {
+        pivate int vorherigeid = 0;
         int id;
         String kommentar;
 
@@ -11,7 +12,7 @@ public class Gegenstaende {
 
         
     public void setId(int id) {
-        this.id = id;
+        this.id = naechsteId++;;
     }
 
     public int getId() {
