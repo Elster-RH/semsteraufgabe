@@ -1,48 +1,40 @@
 public class Buch extends Gegenstaende {
 
-  String bezeichnung;
-  int amount;
-  boolean lendability;
-  int modNumber;
-  int condition;
-  int buchid;
+    String bezeichnung;
+    boolean lendability;
+    String modNumber;
+    int buchid;
+    private static int vorherigeBuchId = 0;
 
-  public Buch(int id, String kommentar, String bezeichnung, int amount, boolean lendability, int modNumber, int condition, int buchid) throws RentalSystemException.EmptyField {
+    public enum Condition {
+        POOR, FAIR, GOOD, VERY_GOOD, LIKE_NEW
+    }
+    Condition condition;
+
+  public Buch(int id, String kommentar, String bezeichnung, String modNumber, Condition condition, int buchid) throws RentalSystemException.EmptyField {
         super(id, kommentar);
-      if (bezeichnung == null || bezeichnung.isEmpty()) {
-          throw new RentalSystemException.EmptyField();
-      }
+
         setBezeichnung(bezeichnung);
-      if (amount == 0) {
-          throw new RentalSystemException.EmptyField();
-      }
-        setAmount(amount);
-        setLendability(lendability);
+        this.lendability = true;
         setModNumber(modNumber);
         setCondition(condition);
-        setBuchid(buchid);
+        setBuchid();
     
         getBezeichnung();
-        getAmount();
         getLendability();
         getModNumber();
         getCondition();
         getBuchid();
   }
-   public void setBezeichnung(String bezeichnung) {
-        this.bezeichnung = bezeichnung;
+   public void setBezeichnung(String bezeichnung) throws RentalSystemException.EmptyField {
+       if (bezeichnung == null || bezeichnung.isEmpty()) {
+           throw new RentalSystemException.EmptyField();
+       }
+      this.bezeichnung = bezeichnung;
     }
 
-    public String getBezeichnung() {
+    public String getBezeichnung() throws RentalSystemException.EmptyField{
         return bezeichnung;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public int getAmount() {
-        return amount;
     }
 
     public void setLendability(boolean lendability) {
@@ -53,29 +45,52 @@ public class Buch extends Gegenstaende {
         return lendability;
     }
 
-    public void setModNumber(int modNumber) {
-        this.modNumber = modNumber;
+    public void setModNumber(String modNumber) throws RentalSystemException.EmptyField{
+        if (modNumber == null || modNumber.isEmpty()) {
+            throw new RentalSystemException.EmptyField();
+        }
+      this.modNumber = modNumber;
     }
 
-    public int getModNumber() {
+    public String getModNumber() {
         return modNumber;
     }
 
-    public void setCondition(int condition) {
-        this.condition = condition;
+    public void setCondition(Condition condition)throws RentalSystemException.EmptyField
+    {
+
+            if (condition == null) {
+                throw new RentalSystemException.EmptyField();
+            }
+            this.condition = condition;
+
     }
 
-    public int getCondition() {
+    public Condition getCondition() {
         return condition;
     }
+    public static void setvorherigeBuchId(int alteId) {
 
-    public void setBuchid(int buchid) {
-        this.buchid = buchid;
+        if (vorherigeBuchId < alteId) {
+            vorherigeBuchId = alteId;
+
+        }
+    }
+
+    public void setBuchid() {
+        this.buchid = vorherigeBuchId++;
     }
 
     public int getBuchid() {
         return buchid;
     }
+
+    @Override
+    public String toString() {
+        return "Buch{" + "\n  id: " + id + ",\n  kommentar: '" + kommentar + '\'' + ",\n  bezeichnung: '" + bezeichnung + '\'' + ",\n  modNumber: '" + modNumber + '\'' + ",\n  condition: " + condition + ",\n  buchid: " + buchid + "\n}";
+    }
+
+
 }
 
 
