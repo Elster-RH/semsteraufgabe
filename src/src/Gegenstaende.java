@@ -1,5 +1,5 @@
 public abstract class Gegenstaende {
-        private static int vorherigeId = 0;
+        private static int aktuelleId = 0;
         int id;
         String kommentar;
 
@@ -12,20 +12,21 @@ public abstract class Gegenstaende {
         getkommentar(); 
         }
 
-    public static void setvorherigeId(int alteId){
-            if(vorherigeId < alteId){
-                vorherigeId = alteId;
+    public static void setaktuelleId(int ausgeleseneId){
+            if(aktuelleId > ausgeleseneId){
+                aktuelleId = ausgeleseneId + 1;
 
             }
 
     }
 
-    public static int getvorherigeId(){
-            return vorherigeId;
+    public static int getaktuelleId(){
+            return aktuelleId;
     }
 
     public void setId() {
-        this.id = vorherigeId++;
+        this.id = aktuelleId;
+        aktuelleId++;
     }
 
     public int getId() {

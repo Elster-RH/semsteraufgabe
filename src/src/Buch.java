@@ -4,7 +4,7 @@ public class Buch extends Gegenstaende {
     boolean lendability;
     String modNumber;
     int buchid;
-    private static int vorherigeBuchId = 0;
+    private static int aktuelleBuchId = 0;
 
     public enum Condition {
         POOR, FAIR, GOOD, VERY_GOOD, LIKE_NEW
@@ -69,16 +69,19 @@ public class Buch extends Gegenstaende {
     public Condition getCondition() {
         return condition;
     }
-    public static void setvorherigeBuchId(int alteId) {
-
-        if (vorherigeBuchId < alteId) {
-            vorherigeBuchId = alteId;
+    public static void setaktuelleBuchId(int ausgeleseneId) {
+        if (aktuelleBuchId > ausgeleseneId) {
+            aktuelleBuchId = ausgeleseneId + 1;
 
         }
     }
+    public static int getaktuelleBuchId(){
+        return aktuelleBuchId;
+    }
 
     public void setBuchid() {
-        this.buchid = vorherigeBuchId++;
+        this.buchid = aktuelleBuchId;
+        aktuelleBuchId++;
     }
 
     public int getBuchid() {

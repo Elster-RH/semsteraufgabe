@@ -26,6 +26,12 @@ public class RentalSystemException extends Exception {
             super("E-Mail nicht gefunden.");
         }
     }
+
+    static class IdNotFound extends RentalSystemException {
+        public IdNotFound() {
+            super("ID nicht gefunden.");
+        }
+    }
 }
 
 
