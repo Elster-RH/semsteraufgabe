@@ -1,6 +1,6 @@
 public class Buch extends Gegenstaende {
 
-    String bezeichnung;
+    String Titel;
     boolean lendability;
     String modNumber;
     int buchid;
@@ -11,30 +11,30 @@ public class Buch extends Gegenstaende {
     }
     Condition condition;
 
-  public Buch(int id, String kommentar, String bezeichnung, String modNumber, Condition condition, int buchid) throws RentalSystemException.EmptyField {
-        super(id, kommentar);
+  public Buch(int id, String kommentar, String Titel, String modNumber, Condition condition, int buchid) throws RentalSystemException.EmptyField {
+        super(id, kommentar, "Buch");
 
-        setBezeichnung(bezeichnung);
+        setTitel(Titel);
         this.lendability = true;
         setModNumber(modNumber);
         setCondition(condition);
         setBuchid();
     
-        getBezeichnung();
+        getTitel();
         getLendability();
         getModNumber();
         getCondition();
         getBuchid();
   }
-   public void setBezeichnung(String bezeichnung) throws RentalSystemException.EmptyField {
-       if (bezeichnung == null || bezeichnung.isEmpty()) {
+   public void setTitel(String Titel) throws RentalSystemException.EmptyField {
+       if (Titel == null || Titel.isEmpty()) {
            throw new RentalSystemException.EmptyField();
        }
-      this.bezeichnung = bezeichnung;
+      this.Titel = Titel;
     }
 
-    public String getBezeichnung() throws RentalSystemException.EmptyField{
-        return bezeichnung;
+    public String getTitel() throws RentalSystemException.EmptyField{
+        return Titel;
     }
 
     public void setLendability(boolean lendability) {
@@ -90,7 +90,7 @@ public class Buch extends Gegenstaende {
 
     @Override
     public String toString() {
-        return "Buch{" + "\n  id: " + id + ",\n  kommentar: '" + kommentar + '\'' + ",\n  bezeichnung: '" + bezeichnung + '\'' + ",\n  modNumber: '" + modNumber + '\'' + ",\n  condition: " + condition + ",\n  buchid: " + buchid + "\n}";
+        return "Buch{" + "\n  id: " + id + ",\n  kommentar: '" + kommentar + '\'' + ",\n  bezeichnung: '" + Titel + '\'' + ",\n  modNumber: '" + modNumber + '\'' + ",\n  condition: " + condition + ",\n  buchid: " + buchid + "\n}";
     }
 
 
