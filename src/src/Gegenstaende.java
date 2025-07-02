@@ -3,7 +3,7 @@ public abstract class Gegenstaende {
         int id;
         String kommentar;
 
-        public Gegenstaende(int id, String kommentar) {
+        public Gegenstaende(String kommentar) {
         setId();
 
         setkommentar(kommentar);

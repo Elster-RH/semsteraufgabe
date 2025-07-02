@@ -1,8 +1,7 @@
 public class Buch extends Gegenstaende {
 
-    String bezeichnung;
-    boolean lendability;
-    String modNumber;
+    private String bezeichnung;
+    private String modNumber;
     int buchid;
     private static int aktuelleBuchId = 0;
 
@@ -11,20 +10,13 @@ public class Buch extends Gegenstaende {
     }
     Condition condition;
 
-  public Buch(int id, String kommentar, String bezeichnung, String modNumber, Condition condition, int buchid) throws RentalSystemException.EmptyField {
-        super(id, kommentar);
+  public Buch(String kommentar, String bezeichnung, String modNumber, Condition condition) throws RentalSystemException.EmptyField {
+        super(kommentar);
 
         setBezeichnung(bezeichnung);
-        this.lendability = true;
         setModNumber(modNumber);
         setCondition(condition);
         setBuchid();
-    
-        getBezeichnung();
-        getLendability();
-        getModNumber();
-        getCondition();
-        getBuchid();
   }
    public void setBezeichnung(String bezeichnung) throws RentalSystemException.EmptyField {
        if (bezeichnung == null || bezeichnung.isEmpty()) {
@@ -33,16 +25,8 @@ public class Buch extends Gegenstaende {
       this.bezeichnung = bezeichnung;
     }
 
-    public String getBezeichnung() throws RentalSystemException.EmptyField{
+    public String getBezeichnung() {
         return bezeichnung;
-    }
-
-    public void setLendability(boolean lendability) {
-        this.lendability = lendability;
-    }
-
-    public boolean getLendability() {
-        return lendability;
     }
 
     public void setModNumber(String modNumber) throws RentalSystemException.EmptyField{
