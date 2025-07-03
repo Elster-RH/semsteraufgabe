@@ -4,14 +4,14 @@ public abstract class Gegenstaende {
         String kommentar;
         String bezeichnung;
 
-        public Gegenstaende(int id, String kommentar, String bezeichnung) {
-        setId();
+        public Gegenstaende(String kommentar, String bezeichnung) {
 
-        setkommentar(kommentar);
+            setId();
+            setkommentar(kommentar);
 
-        getId();
-        getBezeichnung();
-        getkommentar(); 
+            getId();
+            getBezeichnung();
+            getkommentar();
         }
 
     public static void setaktuelleId(int ausgeleseneId){
