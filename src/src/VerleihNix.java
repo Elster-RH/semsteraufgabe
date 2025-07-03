@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class VerleihNix extends JFrame {
 
-    public VerleihNix(StudentContainer container) {
+    public VerleihNix(StudentContainer container, GegenstaendeContainer objContainer) {
 
         setTitle("VerleihNix");
         setSize(600, 600);
@@ -26,6 +26,11 @@ public class VerleihNix extends JFrame {
             addStudent student = new addStudent(this, container);
             student.setVisible(true);
         });
+        button2.addActionListener(e -> {
+            addObjekt objekt = new addObjekt(this, objContainer);
+            objekt.setVisible(true);
+        });
+
 
         add(buttonPanel, BorderLayout.SOUTH);
 
@@ -37,6 +42,7 @@ public class VerleihNix extends JFrame {
     public static void main(String[] args) {
 
         StudentContainer container = new StudentContainer();
+        GegenstaendeContainer objContainer = new GegenstaendeContainer();
 
 
         try(Scanner input = new Scanner(new File("Student.csv"))){
@@ -53,6 +59,6 @@ public class VerleihNix extends JFrame {
         }
 
 
-        new VerleihNix(container);
+        new VerleihNix(container, objContainer);
     }
 }

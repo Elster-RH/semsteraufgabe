@@ -9,7 +9,7 @@ public class Student {
 
     public Student (String eMail, String firstName, String lastName, String phoneNumber, Address address) throws RentalSystemException {
 
-        seteMail(eMail);
+        seteMail(eMail);     //überprüfen ob es die email schon gibt (equil-Methode)
 
         if (firstName == null || firstName.isEmpty()) {
             throw new RentalSystemException.EmptyField();
