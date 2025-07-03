@@ -2,13 +2,15 @@ public abstract class Gegenstaende {
         private static int aktuelleId = 0;
         int id;
         String kommentar;
+        String bezeichnung;
 
-        public Gegenstaende(String kommentar) {
+        public Gegenstaende(int id, String kommentar, String bezeichnung) {
         setId();
 
         setkommentar(kommentar);
 
         getId();
+        getBezeichnung();
         getkommentar(); 
         }
 
@@ -31,6 +33,10 @@ public abstract class Gegenstaende {
 
     public int getId() {
         return id;
+    }
+
+    public String getBezeichnung(){
+        return bezeichnung;
     }
 
     public String getkommentar() {

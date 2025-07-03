@@ -4,8 +4,8 @@ public class Schluessel extends Gegenstaende {
   private int schluesselId;
   private static int aktuelleSchluesselId = 0;
 
-  public Schluessel(String kommentar, String schliesst) throws RentalSystemException.EmptyField {
-    super(kommentar);
+  public Schluessel(int id, String kommentar, String schliesst) throws RentalSystemException.EmptyField {
+    super(id, kommentar, "Schluessel");
 
     setSchliesst(schliesst);
     setSchluesselId();
