@@ -27,3 +27,10 @@ Buch{
   condition: POOR,
   buchid: 0
 }
+0,
+  kommentar: 'Auto',
+  bezeichnung: 'Auto2',
+  modNumber: '1424',
+  condition: POOR,
+  buchid: 0
+}

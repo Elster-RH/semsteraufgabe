@@ -4,7 +4,7 @@ public abstract class Gegenstaende {
         String kommentar;
         String bezeichnung;
 
-        public Gegenstaende(String kommentar, String bezeichnung) {
+        public Gegenstaende(String kommentar) {
 
             setId();
             setkommentar(kommentar);

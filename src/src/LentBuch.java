@@ -20,9 +20,7 @@ public class LentBuch extends Buch {
 
     public void addBackDate(int backDate) throws RentalSystemException {
 
-        LocalDate back = LocalDate.now();
-        back = back.plusDays(backDate);
-
+        LocalDate back = lentDate.plusDays(backDate);
         this.backDate = back ;
     }
 

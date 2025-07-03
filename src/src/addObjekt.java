@@ -1,102 +1,106 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class addObjekt extends JDialog {
 
-    private final CardLayout cardLayout;
-    private JPanel cardsPanel;
-    private Buch buch;
-    private Schluessel schluessel;
-    private GegenstaendeContainer GeContainer;
 
+        private GegenstaendeContainer container;
+        private Buch buch;
+        private Buch.Condition condition;
 
-    private JTextField modNumber;
-    private JTextField kommentar;
-    private JTextField Titel;
-    private JComboBox Condition;
-    private JTextField schliesst;
+        private JTextField kommentar;
+        private JTextField bezeichnung;
+        private JTextField modNumber;
+        private JTextField coindition;
 
 
     public addObjekt(Frame parent, GegenstaendeContainer container) {
-        super(parent, "Objekt hinzufügen", true);
-        setSize(500, 300);
-        String[] gegenstandTypen = { "Buch", "Schlüssel" };
-        this.GeContainer = container;
+            super(parent, "Buch hinzufügen", true);
+            this.container = container;
+            setSize(500, 300);
 
-        cardLayout = new CardLayout();
-        cardsPanel = new JPanel(cardLayout);
+            JPanel buttonPanel = new JPanel();
+            JPanel objektPanel = new JPanel();
+            JPanel buchPanel = new JPanel();
 
-        JPanel buttonPanel = new JPanel();
+            buchPanel.setLayout(new GridLayout(4, 2));
 
-        JLabel bezeichnungtext = new JLabel("Bezeichnung:");
-        JLabel modNumbertext = new JLabel("Model/Seriennummer:");
-        JLabel schliessttext = new JLabel("Schlüssel schließt::");
-        JLabel Titeltext = new JLabel("Buchtitel:");
-        JLabel Conditiontext = new JLabel("Condition:");
-        JLabel Kommentartext = new JLabel("Kommentar:");
+            JLabel kommentarLabel= new JLabel("Kommentar:");
+            JLabel bezeichnungLabel = new JLabel("Bezeichnung:");
+            JLabel modNumberLabel = new JLabel("Mod Number:");
+            JLabel coinditioLabel = new JLabel("Zustand:");
 
-        JPanel objektPanel = new JPanel();
-        objektPanel.setLayout(new GridLayout(3, 2));
+            JComboBox<Buch.Condition> conditionComboBox = new JComboBox<>(Buch.Condition.values());
 
+            objektPanel.setLayout(new GridLayout(3, 2));
+            buchPanel.add(kommentarLabel);
+            kommentar = new JTextField();
+            buchPanel.add(kommentar);
+            buchPanel.add(bezeichnungLabel);
+            bezeichnung = new JTextField();
+            buchPanel.add(bezeichnung);
+            buchPanel.add(modNumberLabel);
+            modNumber = new JTextField();
+            buchPanel.add(modNumber);
+            buchPanel.add(coinditioLabel);
+            coindition = new JTextField();
+            buchPanel.add(conditionComboBox);
 
-        objektPanel.add(bezeichnungtext);
-        JComboBox<String> bezeichnung = new JComboBox<>(gegenstandTypen);
-        objektPanel.add(bezeichnung);
-        add(objektPanel, BorderLayout.NORTH);
+            JButton addButton = new JButton("Objekt hinzufügen");
+            JButton removeButton = new JButton("Objekt entfernen");
+            JButton cancelButton = new JButton("Schließen");
 
-        objektPanel.add(Kommentartext);
-        kommentar = new JTextField(20);
-        objektPanel.add(kommentar);
+            buttonPanel.add(addButton);
+            buttonPanel.add(removeButton);
+            buttonPanel.add(cancelButton);
 
-        JPanel buchPanel = new JPanel();
-        buchPanel.setLayout(new GridLayout(2, 2));
+                cancelButton.addActionListener(e -> {
+                    dispose();
+                });
+                addButton.addActionListener(e -> {
 
-        buchPanel.add(modNumbertext);
-        modNumber = new JTextField(20);
-        buchPanel.add(modNumber);
+                    condition = (Buch.Condition) conditionComboBox.getSelectedItem();
+                    try {
+                        save();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (RentalSystemException ex) {
+                        ex.getMessage();
+                    }
+                });
 
-        buchPanel.add(Titeltext);
-        Titel = new JTextField(20);
-        buchPanel.add(Titel);
+                add(buttonPanel, BorderLayout.SOUTH);
+                add(buchPanel, BorderLayout.NORTH);
+            }
 
-        JPanel schluesselPanel = new JPanel();
-        schluesselPanel.setLayout(new GridLayout(1, 2));
-
-        schluesselPanel.add(schliessttext);
-        schliesst =  new JTextField(20);
-        schluesselPanel.add(schliesst);
-
-        buchPanel.add(Conditiontext);
-        JComboBox<Buch.Condition> conditionComboBox = new JComboBox<>(Buch.Condition.values());
-        buchPanel.add(conditionComboBox);
-
-        add(cardsPanel, BorderLayout.CENTER);
-        cardsPanel.add(buchPanel, "Buch");
-        cardsPanel.add(schluesselPanel, "Schlüssel");
-
-         bezeichnung.addActionListener(e -> {
-             String selected = (String) bezeichnung.getSelectedItem();
-             if("Buch".equals(selected)) {
-                 cardLayout.show(cardsPanel, "Buch");
-             }else if("Schlüssel".equals(selected)) {
-                 cardLayout.show(cardsPanel, "Schlüssel");
-             }
-         }) ;
-
-
-        JButton addButton = new JButton("Objekt hinzufügen");
-        JButton removeButton = new JButton("Objekt entfernen");
-        JButton cancelButton = new JButton("Schließen");
+            private void save() throws IOException, RentalSystemException {
 
 
 
-        buttonPanel.add(addButton);
-        buttonPanel.add(removeButton);
-        buttonPanel.add(cancelButton);
-        cancelButton.addActionListener(e -> {
-            dispose();
-        });
+                buch = new Buch(kommentar.getText(), bezeichnung.getText(), modNumber.getText(), condition);
 
-        add(buttonPanel, BorderLayout.SOUTH);
-    }
-}
+                container.addGegenstand(buch);
+
+
+
+
+                try(FileWriter wirter = new FileWriter("Buch.csv", true)) {
+
+                    wirter.write(buch.toString());
+                } catch(IOException e) {
+                    e.printStackTrace();
+                }
+
+                clear();
+
+            }
+
+            private void clear() {
+                kommentar.setText("");
+                bezeichnung.setText("");
+                modNumber.setText("");
+                coindition.setText("");
+            }
+        }
