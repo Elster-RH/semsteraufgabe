@@ -74,7 +74,7 @@ public class Buch extends Gegenstaende {
 
     @Override
     public String toString() {
-        return "Buch{" + "\n  id: " + id + ",\n  kommentar: '" + kommentar + '\'' + ",\n  bezeichnung: '" + bezeichnung + '\'' + ",\n  modNumber: '" + modNumber + '\'' + ",\n  condition: " + condition + ",\n  buchid: " + buchid + "\n}";
+        return "\n" + id + ",\n  kommentar: '" + kommentar + '\'' + ",\n  bezeichnung: '" + bezeichnung + '\'' + ",\n  modNumber: '" + modNumber + '\'' + ",\n  condition: " + condition + ",\n  buchid: " + buchid + "\n}";
     }
 
 

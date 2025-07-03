@@ -1,0 +1,29 @@
+Buch{
+  id: 0,
+  kommentar: 'Dystopie',
+  bezeichnung: 'AnimalFarm',
+  modNumber: '1110',
+  condition: POOR,
+  buchid: 0
+}Buch{
+  id: 0,
+  kommentar: 'thriller',
+  bezeichnung: 'dieAkte',
+  modNumber: '1110',
+  condition: POOR,
+  buchid: 0
+}Buch{
+  id: 1,
+  kommentar: 'drama',
+  bezeichnung: 'ForsetGump',
+  modNumber: '1112',
+  condition: POOR,
+  buchid: 1
+}Buch{
+  id: 0,
+  kommentar: 'Drama ',
+  bezeichnung: 'ImWestenNichtsNeues',
+  modNumber: '15897',
+  condition: POOR,
+  buchid: 0
+}
