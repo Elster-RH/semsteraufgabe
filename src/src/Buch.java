@@ -10,8 +10,8 @@ public class Buch extends Gegenstaende {
     }
     Condition condition;
 
-  public Buch(String kommentar, String bezeichnung, String modNumber, Condition condition) throws RentalSystemException.EmptyField {
-        super(kommentar);
+  public Buch(int id, String kommentar, String bezeichnung, String modNumber, Condition condition) throws RentalSystemException.EmptyField {
+        super(id, kommentar,"buch");
 
         setBezeichnung(bezeichnung);
         setModNumber(modNumber);
