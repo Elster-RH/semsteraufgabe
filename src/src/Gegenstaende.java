@@ -1,17 +1,10 @@
 import java.time.LocalDate;
 
-
-
 public abstract class Gegenstaende {
         private static int aktuelleId = 0;
         int id;
         String kommentar;
         String bezeichnung;
-
-
-
-
-
 
         public Gegenstaende(int id, String kommentar, String bezeichnung) {
 
@@ -52,23 +45,10 @@ public abstract class Gegenstaende {
         return kommentar;
     }
 
-
-    public void addPfand(int pfand) throws RentalSystemException{
-        setPfand(pfand);
-    }
-
-
-
     public void addComment(String comment) {
         if(kommentar == null){
             System.exit(0);
         }
         this.kommentar = kommentar;
-    }
-
-
-
-
-
     }
 }
