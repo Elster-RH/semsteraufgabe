@@ -8,7 +8,7 @@ public class addObjekt extends JDialog {
 
         private GegenstaendeContainer container;
         private Buch buch;
-        private Buch.Condition condition;
+        //private Buch.Condition condition;
 
         private JTextField kommentar;
         private JTextField bezeichnung;
@@ -32,7 +32,7 @@ public class addObjekt extends JDialog {
             JLabel modNumberLabel = new JLabel("Mod Number:");
             JLabel coinditioLabel = new JLabel("Zustand:");
 
-            JComboBox<Buch.Condition> conditionComboBox = new JComboBox<>(Buch.Condition.values());
+            //JComboBox<Buch.Condition> conditionComboBox = new JComboBox<>(Buch.Condition.values());
 
             objektPanel.setLayout(new GridLayout(3, 2));
             buchPanel.add(kommentarLabel);
@@ -46,7 +46,7 @@ public class addObjekt extends JDialog {
             buchPanel.add(modNumber);
             buchPanel.add(coinditioLabel);
             coindition = new JTextField();
-            buchPanel.add(conditionComboBox);
+            //buchPanel.add(conditionComboBox);
 
             JButton addButton = new JButton("Objekt hinzufügen");
             JButton removeButton = new JButton("Objekt entfernen");
@@ -61,7 +61,7 @@ public class addObjekt extends JDialog {
                 });
                 addButton.addActionListener(e -> {
 
-                    condition = (Buch.Condition) conditionComboBox.getSelectedItem();
+                    //condition = (Buch.Condition) conditionComboBox.getSelectedItem();
                     try {
                         save();
                     } catch (IOException ex) {
@@ -79,7 +79,7 @@ public class addObjekt extends JDialog {
 
 
 
-                buch = new Buch(Gegenstaende.getId(), kommentar.getText(), bezeichnung.getText(), modNumber.getText(), condition);
+                buch = new Buch(Gegenstaende.getaktuelleId(), kommentar.getText(), bezeichnung.getText(), modNumber.getText());
 
                 container.addGegenstand(buch);
 

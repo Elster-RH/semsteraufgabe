@@ -27,7 +27,7 @@ public class copyBook {
         this.modNumber = modNumber;
     }
 
-    public void setLentduration(LocalDate lentduration) throws RentalSystemException {
+    public void setLentduration(LocalDate lentduration) {
         this.lentduration = lentduration;
     }
 
