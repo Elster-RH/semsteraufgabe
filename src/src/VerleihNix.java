@@ -15,7 +15,7 @@ public class VerleihNix extends JFrame {
         centerPanel.setLayout(new FlowLayout());
         centerPanel.setSize(300,150);
 
-        JButton button1 = new JButton("Student hinzufügen");
+        JButton button1 = new JButton("Neuen Studenten anlegen");
         JButton button2 = new JButton("Objekt hinzufügen");
         JButton button3 = new JButton("Schließen");
         JButton button4 = new JButton("Schluessel verleihen");

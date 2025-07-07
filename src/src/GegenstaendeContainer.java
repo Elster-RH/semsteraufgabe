@@ -30,19 +30,7 @@ public class GegenstaendeContainer implements  Iterable<Gegenstaende>{
 
         return false;
     }
-    public void aktualisiereNaechsteId() {
-        for (Gegenstaende g : allGegenstaende) {
-            if (g.getId() >= Gegenstaende.getaktuelleId()) {
-                Gegenstaende.setaktuelleId(g.getId());
-            }
-            if (g.getId() >= Buch.getaktuelleBuchId()) {
-                Buch.setaktuelleBuchId(g.getId());
-            }
-            if (g.getId() >= Schluessel.getaktuelleSchluesselId()) {
-                Schluessel.setaktuelleSchlusselId(g.getId());
-            }
-        }
-    }
+
 
     public void printAllGegenstaende() {
         for (Gegenstaende g : allGegenstaende) {

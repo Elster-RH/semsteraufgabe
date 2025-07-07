@@ -2,29 +2,23 @@ import java.util.ArrayList;
 
 public class Buch extends Gegenstaende {
 
-    int buchid;
     private static int aktuelleBuchId = 0;
     private int amount;
     private boolean firstlent;
     private boolean outtofstock;
+    private String title;
     private ArrayList<copyBook> amountCopys;
 
-  public Buch(int id, String kommentar, String bezeichnung, String modNumber) throws RentalSystemException.EmptyField {
-        super(id, kommentar,"buch");
-        setBuchid();
+  public Buch(String kommentar, String title, int amount) throws RentalSystemException.EmptyField {
+        super(kommentar,"buch");
         setAmount(amount);
+        setTitle(title);
         firstlent = true;
         outtofstock = true;
         amountCopys = new ArrayList<copyBook>();
 
   }
 
-    public static void setaktuelleBuchId(int ausgeleseneId) {
-        if (aktuelleBuchId > ausgeleseneId) {
-            aktuelleBuchId = ausgeleseneId + 1;
-
-        }
-    }
     public void addCopy(copyBook copyBook) throws RentalSystemException {
         if(amountCopys.size() == amount){
             throw new RentalSystemException("Das Lager hat keine nicht eingetragenen Kopien des Buches mehr");
@@ -36,12 +30,17 @@ public class Buch extends Gegenstaende {
 
 
 //setter
-    public void setBuchid() {
-        this.buchid = aktuelleBuchId;
-        aktuelleBuchId++;
-    }
+
     public void setAmount(int amount) {
       this.amount = amount;
+    }
+
+    public void setTitle(String title) throws RentalSystemException {
+      if (title.isEmpty()) {
+          throw new RentalSystemException();
+      }else {
+          this.title = title;
+      }
     }
 
     public void setFirstlent(boolean firstlent) {
@@ -54,9 +53,7 @@ public class Buch extends Gegenstaende {
 
 
 //getter
-    public int getBuchid() {
-        return buchid;
-    }
+
     public String getBezeichnung() {
         return bezeichnung;
     }
@@ -102,7 +99,7 @@ public class Buch extends Gegenstaende {
 
     @Override
     public String toString() {
-        return "\n" + id + ",\n  kommentar: '" + kommentar + '\'' + ",\n  bezeichnung: '" + bezeichnung + '\'' + ",\n  modNumber: '"  + ",\n  buchid: " + buchid + "\n}";
+        return "\n" + id + ",\n  kommentar: '" + kommentar + '\'' + ",\n  bezeichnung: '" + bezeichnung + '\'' + ",\n  modNumber: '"  + "\n}";
     }
 
 

@@ -73,5 +73,8 @@ public class Student {
                  + ";" +  phoneNumber;
     }
 
+    @Override
+    public boolean equals(Object obj) {}
+
 }
 

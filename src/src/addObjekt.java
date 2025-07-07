@@ -79,7 +79,7 @@ public class addObjekt extends JDialog {
 
 
 
-                buch = new Buch(Gegenstaende.getaktuelleId(), kommentar.getText(), bezeichnung.getText(), modNumber.getText());
+                buch = new Buch(kommentar.getText(), bezeichnung.getText());
 
                 container.addGegenstand(buch);
 

@@ -6,14 +6,12 @@ public abstract class Gegenstaende {
         String kommentar;
         String bezeichnung;
 
-        public Gegenstaende(int id, String kommentar, String bezeichnung) {
+        public Gegenstaende(String kommentar, String bezeichnung) {
 
             setId();
             addComment(kommentar);
+            setBezeihnung(bezeichnung);
 
-            getId();
-            getBezeichnung();
-            getkommentar();
         }
 
     public static void setaktuelleId(int ausgeleseneId){
@@ -35,6 +33,10 @@ public abstract class Gegenstaende {
 
     public int getId() {
         return id;
+    }
+
+    public void setBezeihnung(String bezeichnung) {
+            this.bezeichnung = bezeichnung;
     }
 
     public String getBezeichnung(){

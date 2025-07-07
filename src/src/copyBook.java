@@ -7,15 +7,16 @@ public class copyBook {
     private LocalDate backDate;
     private LocalDate lentduration;
     private int pfand;
+    private final LocalDate lentDate = LocalDate.now();
     public enum Condition {
         POOR, FAIR, GOOD, VERY_GOOD, LIKE_NEW
     }
     Condition condition;
 
-    private final LocalDate lentDate = LocalDate.now();
-    public copyBook(String modNumber, Student student, Condition condition) throws RentalSystemException{
+
+
+    public copyBook(String modNumber, Condition condition) throws RentalSystemException{
         setModNumber(modNumber);
-        setStundent(student);
         setCondition(condition);
 
     }
