@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 public class VerleihNix extends JFrame {
@@ -54,16 +53,44 @@ public class VerleihNix extends JFrame {
         GegenstaendeContainer objContainer = new GegenstaendeContainer();
 
 
-        try(Scanner input = new Scanner(new File("Student.csv"))){
-            while (input.hasNextLine()) {
-                Address address = new Address(input.nextLine(), input.nextLine(), input.nextLine(), input.nextLine());
-                Student student = new Student(input.nextLine(), input.nextLine(), input.nextLine(), input.nextLine(), address);
-                container.addStudent(student);
-            }
+        try(BufferedReader in1 = new BufferedReader(new FileReader("Student.csv"))){
+            String zeile;
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (RentalSystemException e) {
+            while ((zeile = in1.readLine()) != null) {
+
+                String[] data = zeile.split(";");
+
+                Address address;
+                Student student;
+
+                if(data.length == 8){
+                    String road = data[0];
+                    String houseNumber = data[1];
+                    String postCode = data[2];
+                    String city = data[3];
+
+                    try{
+                        address = new Address(road, houseNumber, postCode, city);
+
+                    } catch (RentalSystemException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    String eMail = data[4];
+                    String firstName =  data[5];
+                    String lastName = data[6];
+                    String phoneNumber =  data[7];
+
+                    try {
+                        student = new Student (eMail, firstName, lastName, phoneNumber, address);
+                    } catch (RentalSystemException e) {
+                        throw new RuntimeException(e);
+                    }
+                    container.addStudent(student);
+                }
+
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

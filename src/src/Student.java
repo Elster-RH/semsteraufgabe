@@ -69,8 +69,8 @@ public class Student {
 
     @Override
     public String toString() {
-        return  address + "\n" + eMail + "\n" + firstName  + "\n" + lastName
-                 + " \n" +  phoneNumber +"\n";
+        return  address + ";" + eMail + ";" + firstName  + ";" + lastName
+                 + ";" +  phoneNumber;
     }
 
 }
