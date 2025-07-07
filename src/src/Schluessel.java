@@ -1,14 +1,19 @@
 public class Schluessel extends Gegenstaende {
 
-  String schliesst;
-  private static int aktuelleSchluesselId = 0;
+  private String schliesst;
+  private boolean lent;
+  private Student student;
+
 
   public Schluessel(String kommentar, String schliesst) throws RentalSystemException.EmptyField {
     super(kommentar, "schluessel");
 
     setSchliesst(schliesst);
-
+    student = null;
+    setlent();
   }
+
+
   public void setSchliesst(String schliesst) throws RentalSystemException.EmptyField {
     if (schliesst == null || schliesst.isEmpty()) {
       throw new RentalSystemException.EmptyField();
@@ -20,9 +25,22 @@ public class Schluessel extends Gegenstaende {
     return schliesst;
   }
 
+  public void setlent() {
+    if(student == null) {
+      lent = true;
+    }else {
+      lent = false;
+    }
+  }
+
+  public void addStudent(Student student) {
+    this.student = student;
+    setlent();
+  }
+
   @Override
   public String toString() {
-    return "Schluessel{" + "\n  id: " + id + ",\n  kommentar: '" + kommentar + '\'' + ",\n  schliesst: '" + schliesst + '\'' + "\n}";
+    return kommentar + ";" + schliesst + ";" + student ;
   }
 }
 

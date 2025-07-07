@@ -8,23 +8,28 @@ public class VerleihNix extends JFrame {
     public VerleihNix(StudentContainer container, GegenstaendeContainer objContainer) {
 
         setTitle("VerleihNix");
-        setSize(600, 300);
+        setSize(800, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel buttonPanel = new JPanel();
         JPanel centerPanel = new JPanel();
+
         centerPanel.setLayout(new FlowLayout());
-        centerPanel.setSize(300,150);
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
 
         JButton button1 = new JButton("Neuen Studenten anlegen");
         JButton button2 = new JButton("Objekt hinzufügen");
+        JButton keyButton = new JButton("Neuen Schlüssel anlegen");
         JButton button3 = new JButton("Schließen");
         JButton button4 = new JButton("Schluessel verleihen");
         JButton button5 = new JButton("Buch verleihen");
         buttonPanel.add(button1);
         buttonPanel.add(button2);
+        buttonPanel.add(keyButton);
         buttonPanel.add(button3);
         centerPanel.add(button4);
         centerPanel.add(button5);
+
 
         button3.addActionListener(e -> {
             dispose();
@@ -36,6 +41,10 @@ public class VerleihNix extends JFrame {
         button2.addActionListener(e -> {
             addObjekt objekt = new addObjekt(this, objContainer);
             objekt.setVisible(true);
+        });
+        keyButton.addActionListener(e -> {
+            addSchluessel key = new addSchluessel(this, objContainer);
+            key.setVisible(true);
         });
 
 

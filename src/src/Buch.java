@@ -9,7 +9,7 @@ public class Buch extends Gegenstaende {
     private String title;
     private ArrayList<copyBook> amountCopys;
 
-  public Buch(String kommentar, String title, int amount) throws RentalSystemException.EmptyField {
+  public Buch(String kommentar, String title, int amount) throws RentalSystemException {
         super(kommentar,"buch");
         setAmount(amount);
         setTitle(title);
@@ -37,7 +37,7 @@ public class Buch extends Gegenstaende {
 
     public void setTitle(String title) throws RentalSystemException {
       if (title.isEmpty()) {
-          throw new RentalSystemException();
+          throw new RentalSystemException("nö");
       }else {
           this.title = title;
       }
