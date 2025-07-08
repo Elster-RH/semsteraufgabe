@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.util.Scanner;
+import java.util.Objects;
 
 public class VerleihNix extends JFrame {
 
@@ -17,28 +17,28 @@ public class VerleihNix extends JFrame {
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
 
-        JButton button1 = new JButton("Neuen Studenten anlegen");
-        JButton button2 = new JButton("Objekt hinzufügen");
+        JButton studentbutton = new JButton("Neuen Studenten anlegen");
+        JButton bookbutton = new JButton("Objekt hinzufügen");
         JButton keyButton = new JButton("Neuen Schlüssel anlegen");
-        JButton button3 = new JButton("Schließen");
+        JButton closebutton = new JButton("Schließen");
         JButton button4 = new JButton("Schluessel verleihen");
         JButton button5 = new JButton("Buch verleihen");
-        buttonPanel.add(button1);
-        buttonPanel.add(button2);
+        buttonPanel.add(studentbutton);
         buttonPanel.add(keyButton);
-        buttonPanel.add(button3);
+        buttonPanel.add(bookbutton);
+        buttonPanel.add(closebutton);
         centerPanel.add(button4);
         centerPanel.add(button5);
 
 
-        button3.addActionListener(e -> {
+        closebutton.addActionListener(e -> {
             dispose();
         });
-        button1.addActionListener(e -> {
+        studentbutton.addActionListener(e -> {
             addStudent student = new addStudent(this, container);
             student.setVisible(true);
         });
-        button2.addActionListener(e -> {
+        bookbutton.addActionListener(e -> {
             addObjekt objekt = new addObjekt(this, objContainer);
             objekt.setVisible(true);
         });
@@ -62,7 +62,7 @@ public class VerleihNix extends JFrame {
         GegenstaendeContainer objContainer = new GegenstaendeContainer();
 
 
-        try(BufferedReader in1 = new BufferedReader(new FileReader("Student.csv"))){
+        try (BufferedReader in1 = new BufferedReader(new FileReader("Student.csv"))) {
             String zeile;
 
             while ((zeile = in1.readLine()) != null) {
@@ -72,13 +72,13 @@ public class VerleihNix extends JFrame {
                 Address address;
                 Student student;
 
-                if(data.length == 8){
+                if (data.length == 8) {
                     String road = data[0];
                     String houseNumber = data[1];
                     String postCode = data[2];
                     String city = data[3];
 
-                    try{
+                    try {
                         address = new Address(road, houseNumber, postCode, city);
 
                     } catch (RentalSystemException ex) {
@@ -86,12 +86,12 @@ public class VerleihNix extends JFrame {
                     }
 
                     String eMail = data[4];
-                    String firstName =  data[5];
+                    String firstName = data[5];
                     String lastName = data[6];
-                    String phoneNumber =  data[7];
+                    String phoneNumber = data[7];
 
                     try {
-                        student = new Student (eMail, firstName, lastName, phoneNumber, address);
+                        student = new Student(eMail, firstName, lastName, phoneNumber, address);
                     } catch (RentalSystemException e) {
                         throw new RuntimeException(e);
                     }
@@ -103,7 +103,48 @@ public class VerleihNix extends JFrame {
             e.printStackTrace();
         }
 
+        try (BufferedReader in2 = new BufferedReader(new FileReader("Buch.csv"))) {
+            String zeile;
+
+            while ((zeile = in2.readLine()) != null) {
+
+                String[] data = zeile.split(";");
+
+                Schluessel key;
+
+                if (data[0].contains("schluessel")) {
+
+                    if (data[4].contains("null")) {
+                        String comm = data[2];
+                        String schliesst = data[3];
+                        String pfand = data[5];
+                        String lentdate = data[6];
+                        String lentduration = data[7];
+
+
+                        try {
+                            key = new Schluessel(comm, schliesst, pfand, lentdate, lentduration);
+                        } catch (RentalSystemException e) {
+                            throw new RuntimeException(e);
+                        }
+                        objContainer.addGegenstand(key);
+                    } else {
+                        System.out.println("nö");
+                    }
+
+
+                }
+
+
+
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         new VerleihNix(container, objContainer);
+
     }
 }

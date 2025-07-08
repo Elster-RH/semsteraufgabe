@@ -5,12 +5,12 @@ import java.io.IOException;
 
 public class addSchluessel extends JDialog {
 
-    private GegenstaendeContainer container = new GegenstaendeContainer();
+    private GegenstaendeContainer container;
     private Schluessel key;
     private Student student;
 
     private JTextField kommentar;
-    private JTextField bezeichnung;
+    private JTextField Schliesst;
 
 
     public addSchluessel(Frame parent, GegenstaendeContainer container) throws HeadlessException {
@@ -22,15 +22,15 @@ public class addSchluessel extends JDialog {
         JPanel keyPanel = new JPanel();
 
         JLabel kommentarLabel = new JLabel("Kommentar:");
-        JLabel bezeichnungLabel = new JLabel("Bezeichnung:");
+        JLabel bezeichnungLabel = new JLabel("Für das Schloß:");
 
-        keyPanel.setLayout(new FlowLayout());
+        keyPanel.setLayout(new GridLayout(2,2));
         keyPanel.add(kommentarLabel);
         kommentar = new JTextField();
         keyPanel.add(kommentar);
         keyPanel.add(bezeichnungLabel);
-        bezeichnung = new JTextField();
-        keyPanel.add(bezeichnung);
+        Schliesst = new JTextField();
+        keyPanel.add(Schliesst);
 
         JButton addButton = new JButton("Schlüssel hinzufügen");
         JButton cancelButton = new JButton("Schließen");
@@ -40,13 +40,16 @@ public class addSchluessel extends JDialog {
             try {
                 save();
             } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Fehler beim Schreiben der Datei:\n" + ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+            } catch (RentalSystemException.EmptyField ex) {
                 ex.printStackTrace();
-            } catch (RentalSystemException ex) {
-                ex.getMessage();
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
             }
 
         });
         cancelButton.addActionListener(e -> {
+            for(Gegenstaende jay : container)
+                System.out.println(jay);
             dispose();
         });
         buttonPanel.add(addButton);
@@ -58,13 +61,15 @@ public class addSchluessel extends JDialog {
     }
 
 
-    private void save() throws IOException, RentalSystemException {
+    private void save() throws IOException, RentalSystemException.EmptyField {
 
+        System.out.println("Speichern abgeschlossen.");
 
-
-        key = new Schluessel(kommentar.getText(), bezeichnung.getText());
+        key = new Schluessel(kommentar.getText(), Schliesst.getText());
+        System.out.println("2");
 
         container.addGegenstand(key);
+        System.out.println("3");
 
 
 
@@ -82,7 +87,7 @@ public class addSchluessel extends JDialog {
 
     private void clear() {
         kommentar.setText("");
-        bezeichnung.setText("");
+        Schliesst.setText("");
 
     }
 

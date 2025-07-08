@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Buch extends Gegenstaende {
 
     private static int aktuelleBuchId = 0;
+
     private int amount;
     private boolean firstlent;
     private boolean outtofstock;
@@ -11,6 +12,7 @@ public class Buch extends Gegenstaende {
 
   public Buch(String kommentar, String title, int amount) throws RentalSystemException {
         super(kommentar,"buch");
+
         setAmount(amount);
         setTitle(title);
         firstlent = true;
@@ -96,10 +98,18 @@ public class Buch extends Gegenstaende {
     }
 
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Buch other = (Buch) obj;
+        return this.getId() == other.getId();
+    }
+
 
     @Override
     public String toString() {
-        return "\n" + id + ",\n  kommentar: '" + kommentar + '\'' + ",\n  bezeichnung: '" + bezeichnung + '\'' + ",\n  modNumber: '"  + "\n}";
+        return "\n" + ",\n  kommentar: '" + kommentar + '\'' + ",\n  bezeichnung: '" + bezeichnung + '\'' + ",\n  modNumber: '"  + "\n}";
     }
 
 

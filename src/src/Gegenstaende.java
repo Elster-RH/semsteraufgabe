@@ -1,14 +1,13 @@
-import java.time.LocalDate;
-
 public abstract class Gegenstaende {
         private static int aktuelleId = 0;
-        int id;
+
         String kommentar;
         String bezeichnung;
+        String id;
 
         public Gegenstaende(String kommentar, String bezeichnung) {
 
-            setId();
+            id = aktuelleId();
             addComment(kommentar);
             setBezeihnung(bezeichnung);
 
@@ -22,18 +21,33 @@ public abstract class Gegenstaende {
 
     }
 
-    public static int getaktuelleId(){
-            return aktuelleId;
-    }
 
-    public void setId() {
-        this.id = aktuelleId;
-        aktuelleId++;
-    }
 
-    public int getId() {
+    public String getId(){
         return id;
     }
+
+    public String aktuelleId(){
+           aktuelleId++;
+        String s = String.valueOf(aktuelleId);
+            return s;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Schluessel other = (Schluessel) obj;
+        return this.getId() == other.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+
+
 
     public void setBezeihnung(String bezeichnung) {
             this.bezeichnung = bezeichnung;
@@ -48,9 +62,9 @@ public abstract class Gegenstaende {
     }
 
     public void addComment(String comment) {
-        if(kommentar == null){
+        if(comment == null){
             System.exit(0);
         }
-        this.kommentar = kommentar;
+        this.kommentar = comment;
     }
 }
