@@ -32,6 +32,12 @@ public class RentalSystemException extends Exception {
             super("ID nicht gefunden.");
         }
     }
+
+    static class BookNotAvailable extends RentalSystemException {
+        public BookNotAvailable() {
+            super("Buch bereits verliehen.");
+        }
+    }
 }
 
 
