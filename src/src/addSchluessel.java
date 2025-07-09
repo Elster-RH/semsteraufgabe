@@ -43,7 +43,18 @@ public class addSchluessel extends JDialog {
                 JOptionPane.showMessageDialog(this, "Fehler beim Schreiben der Datei:\n" + ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
             } catch (RentalSystemException.EmptyField ex) {
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+                // JOptionPane.showMessageDialog(this, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+
+                JLabel errorWindow = new JLabel( ex.getMessage() );
+                errorWindow.setForeground(Color.RED);
+                errorWindow.setFont(new Font("Arial Black", Font.PLAIN, 30));
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        errorWindow,
+                        "ERROR",
+                        JOptionPane.WARNING_MESSAGE
+                );
             }
 
         });

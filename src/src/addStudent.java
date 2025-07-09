@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class addStudent extends JDialog {
 
@@ -89,8 +91,19 @@ public class addStudent extends JDialog {
                 save();
             } catch (IOException ex) {
                 ex.printStackTrace();
-            } catch (RentalSystemException ex) {
-                ex.getMessage();
+            }catch (RentalSystemException ex) {
+                /*JOptionPane.showMessageDialog(null, "ERROR:\n" + ex.getMessage(), "Fehlermeldung", JOptionPane.WARNING_MESSAGE);*/                // einfacher, funktioniert auch
+
+                JLabel errorWindow = new JLabel( ex.getMessage() );
+                errorWindow.setForeground(Color.RED);
+                errorWindow.setFont(new Font("Arial Black", Font.PLAIN, 30));
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        errorWindow,
+                        "ERROR",
+                        JOptionPane.WARNING_MESSAGE
+                );
             }
         });
         removeButton.addActionListener(e -> {
@@ -110,14 +123,15 @@ public class addStudent extends JDialog {
 
         student = new Student(email.getText(), name.getText(), lastName.getText(), phoneNumber.getText(), address);
 
+        if (studentExists(student.geteMail())) {
+            throw new RentalSystemException.EmailAlreadyExists();
+        }
+
         container.addStudent(student);
 
+        try(FileWriter writer = new FileWriter("Student.csv", true)) {
 
-
-
-        try(FileWriter wirter = new FileWriter("Student.csv", true)) {
-
-            wirter.write(student.toString());
+            writer.write(student.toString());
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -138,4 +152,18 @@ public class addStudent extends JDialog {
 
     }
 
+    private boolean studentExists(String email) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Student.csv"))) {
+            String check;
+            while ((check = reader.readLine()) != null) {
+                String[] parts = check.split(",");
+                if (parts.length > 0 && parts[0].equalsIgnoreCase(email.trim())) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
