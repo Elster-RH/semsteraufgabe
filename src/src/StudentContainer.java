@@ -35,4 +35,15 @@ public class StudentContainer implements  Iterable<Student>{
             System.out.println(x);
         }
     }
+
+    public Student getStudent(String email) {
+
+        for(Student g : allStudents) {
+
+            if (g.geteMail().equals(email)) {
+                return g;
+            }
+        }
+        return null;
+    }
 }

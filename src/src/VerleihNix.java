@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.util.Objects;
 
 public class VerleihNix extends JFrame {
 
@@ -21,13 +20,13 @@ public class VerleihNix extends JFrame {
         JButton bookbutton = new JButton("Objekt hinzufügen");
         JButton keyButton = new JButton("Neuen Schlüssel anlegen");
         JButton closebutton = new JButton("Schließen");
-        JButton button4 = new JButton("Schluessel verleihen");
+        JButton lentkeybutton = new JButton("Schluessel verleihen");
         JButton button5 = new JButton("Buch verleihen");
         buttonPanel.add(studentbutton);
         buttonPanel.add(keyButton);
         buttonPanel.add(bookbutton);
         buttonPanel.add(closebutton);
-        centerPanel.add(button4);
+        centerPanel.add(lentkeybutton);
         centerPanel.add(button5);
 
 
@@ -45,6 +44,11 @@ public class VerleihNix extends JFrame {
         keyButton.addActionListener(e -> {
             addSchluessel key = new addSchluessel(this, objContainer);
             key.setVisible(true);
+        });
+
+        lentkeybutton.addActionListener(e -> {
+            lentSchluessel lentkey = new lentSchluessel(this, objContainer, container);
+            lentkey.setVisible(true);
         });
 
 
@@ -106,6 +110,7 @@ public class VerleihNix extends JFrame {
         try (BufferedReader in2 = new BufferedReader(new FileReader("Buch.csv"))) {
             String zeile;
 
+
             while ((zeile = in2.readLine()) != null) {
 
                 String[] data = zeile.split(";");
@@ -129,7 +134,23 @@ public class VerleihNix extends JFrame {
                         }
                         objContainer.addGegenstand(key);
                     } else {
-                        System.out.println("nö");
+
+
+                        String comm = data[2];
+                        String schliesst = data[3];
+                        String pfand = data[5];
+                        String lentdate = data[6];
+                        String lentduration = data[7];
+                        String eMail = data[4];
+
+                        Student student = container.getStudent(eMail);
+
+                        try {
+                            key = new Schluessel(comm, schliesst, student, pfand, lentdate, lentduration);
+                        } catch (RentalSystemException e) {
+                            throw new RuntimeException(e);
+                        }
+                        objContainer.addGegenstand(key);
                     }
 
 

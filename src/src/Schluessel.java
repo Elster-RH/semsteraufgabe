@@ -27,7 +27,7 @@ public class Schluessel extends Gegenstaende {
     pfand = null;
   }
 
-  public Schluessel(String kommentar, String schliesst, Student student, String pfand, String lentdate, String lentduration, String backdate) throws RentalSystemException.EmptyField {
+  public Schluessel(String kommentar, String schliesst, Student student, String pfand, String lentdate, String lentduration) throws RentalSystemException.EmptyField {
     super(kommentar, "schluessel");
 
     setSchliesst(schliesst);
@@ -36,7 +36,7 @@ public class Schluessel extends Gegenstaende {
     this.pfand = pfand;
     this.lentdate = lentdate;
     this.lentduration = lentduration;
-    this.backdate = backdate;
+    this.backdate = null;
   }
 
   public Schluessel(String kommentar, String schliesst, String pfand, String lentdate, String lentduration) throws RentalSystemException.EmptyField {
@@ -64,6 +64,13 @@ public class Schluessel extends Gegenstaende {
     return schliesst;
   }
 
+  public void setPfand(String pfand) throws RentalSystemException.EmptyField {
+    if (pfand == null || pfand.isEmpty()) {
+      throw new RentalSystemException.EmptyField();
+    }
+    this.pfand = pfand;
+  }
+
   public void setlent() {
     if(student == null) {
       lent = true;
@@ -86,18 +93,21 @@ public class Schluessel extends Gegenstaende {
     lentdate = date;
   }
 
-  public void setLentduration(int lentduration) {
+  public void setLentduration(String lentduration) {
     String input = lentdate ;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-    LocalDate date = LocalDate.parse(input, formatter);
-    date = date.plusDays(lentduration);
+    int zahl = Integer.parseInt(lentduration);
+    LocalDate date = LocalDate.parse(input);
+    date = date.plusDays(zahl);
     String date2 = date.toString();
     this.lentduration = date2;
   }
 
   @Override
   public String toString() {
-    return bezeichnung+ ";" + id + ";" + kommentar + ";" + schliesst + ";" + student + ";" + pfand + ";" + lentdate + ";" + lentduration + ";" + backdate + "\n";
+    if(student == null) {
+      return bezeichnung+ ";" + id + ";" + kommentar + ";" + schliesst + ";" + student + ";" + pfand + ";" + lentdate + ";" + lentduration + ";" + backdate + "\n";
+    }
+    return bezeichnung+ ";" + id + ";" + kommentar + ";" + schliesst + ";" + student.geteMail() + ";" + pfand + ";" + lentdate + ";" + lentduration + ";" + backdate + "\n";
   }
 
   @Override
