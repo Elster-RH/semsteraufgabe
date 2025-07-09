@@ -4,12 +4,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.Iterator;
 
 public class addStudent extends JDialog {
 
-    private Student student;
-    private Address address;
     private StudentContainer container;
 
     private JTextField name ;
@@ -123,9 +120,8 @@ public class addStudent extends JDialog {
 
             try(FileWriter wirter = new FileWriter("Student.csv")) {
 
-                for (Iterator<Student> it = container.iterator(); it.hasNext(); ) {
+                for (Student g : container) {
 
-                    Student g = it.next();
                     wirter.write(g.toString());
                 }
             } catch(IOException ex) {
@@ -142,10 +138,10 @@ public class addStudent extends JDialog {
 
     private void save() throws IOException, RentalSystemException {
 
-        address = new Address(road.getText(), houseNumber.getText(), postalCode.getText(),
+        Address address = new Address(road.getText(), houseNumber.getText(), postalCode.getText(),
                 city.getText());
 
-        student = new Student(email.getText(), name.getText(), lastName.getText(), phoneNumber.getText(), address);
+        Student student = new Student(email.getText(), name.getText(), lastName.getText(), phoneNumber.getText(), address);
 
         if (studentExists(student.geteMail())) {
             throw new RentalSystemException.EmailAlreadyExists();
