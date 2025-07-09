@@ -74,20 +74,14 @@ public class addSchluessel extends JDialog {
 
     private void save() throws IOException, RentalSystemException.EmptyField {
 
-        System.out.println("Speichern abgeschlossen.");
-
         key = new Schluessel(kommentar.getText(), Schliesst.getText());
-        System.out.println("2");
 
         container.addGegenstand(key);
-        System.out.println("3");
-
-
-
 
         try(FileWriter wirter = new FileWriter("Buch.csv", true)) {
 
             wirter.write(key.toString());
+
         } catch(IOException e) {
             e.printStackTrace();
         }

@@ -33,9 +33,9 @@ public class RentalSystemException extends Exception {
         }
     }
 
-    static class BookNotAvailable extends RentalSystemException {
-        public BookNotAvailable() {
-            super("Buch bereits verliehen.");
+    static class NotAvailable extends RentalSystemException {
+        public NotAvailable() {
+            super("Bereits verliehen.");
         }
     }
 }

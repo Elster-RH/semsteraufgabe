@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Schluessel extends Gegenstaende {
 
@@ -17,10 +16,10 @@ public class Schluessel extends Gegenstaende {
 
     super(kommentar, "schluessel");
 
-    System.out.println("4");
+
     setSchliesst(schliesst);
     student = null;
-    setlent();
+    setLent();
     lentdate = null;
     lentduration = null;
     backdate = null;
@@ -32,7 +31,7 @@ public class Schluessel extends Gegenstaende {
 
     setSchliesst(schliesst);
     this.student = student;
-    setlent();
+    setLent();
     this.pfand = pfand;
     this.lentdate = lentdate;
     this.lentduration = lentduration;
@@ -45,7 +44,7 @@ public class Schluessel extends Gegenstaende {
 
     setSchliesst(schliesst);
     this.student = null;
-    setlent();
+    setLent();
     this.pfand = pfand;
     this.lentdate = lentdate;
     this.lentduration = lentduration;
@@ -71,7 +70,7 @@ public class Schluessel extends Gegenstaende {
     this.pfand = pfand;
   }
 
-  public void setlent() {
+  public void setLent() {
     if(student == null) {
       lent = true;
     }else {
@@ -79,11 +78,19 @@ public class Schluessel extends Gegenstaende {
     }
   }
 
+  public boolean getLent() throws RentalSystemException.NotAvailable {
+    if(lent) {
+      return true;
+    } else {
+      throw new RentalSystemException.NotAvailable();
+    }
+  }
+
 
 
   public void addStudent(Student student) {
     this.student = student;
-    setlent();
+    setLent();
   }
 
   public void setLentdate(){

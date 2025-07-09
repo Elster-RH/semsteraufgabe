@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Iterator;
 
 public class addStudent extends JDialog {
 
@@ -84,6 +85,8 @@ public class addStudent extends JDialog {
         buttonPanel.add(removeButton);
         buttonPanel.add(cancelButton);
         cancelButton.addActionListener(e -> {
+            for(Student jay : container)
+                System.out.println(jay);
             dispose();
         });
         addButton.addActionListener(e -> {
@@ -107,8 +110,29 @@ public class addStudent extends JDialog {
             }
         });
         removeButton.addActionListener(e -> {
-            for(Student jay : container)
-            System.out.println(jay);
+
+          if (!(container.removeStudent(email.getText()))){
+              try {
+                  throw new RentalSystemException.EMailNotFound();
+              } catch (RentalSystemException.EMailNotFound ex) {
+                  JOptionPane.showMessageDialog(this, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+                  clear();
+                  return;
+              }
+          }
+
+            try(FileWriter wirter = new FileWriter("Student.csv")) {
+
+                for (Iterator<Student> it = container.iterator(); it.hasNext(); ) {
+
+                    Student g = it.next();
+                    wirter.write(g.toString());
+                }
+            } catch(IOException ex) {
+                ex.printStackTrace();
+            }
+
+            clear();
         });
 
         add(studentPanel, BorderLayout.NORTH);

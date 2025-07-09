@@ -18,7 +18,7 @@ public class GegenstaendeContainer implements  Iterable<Gegenstaende>{
         allGegenstaende.add(gegenstaende);
     }
 
-    /*public boolean removeGegenstand(int id) {
+    public boolean removeGegenstand(String id) {
         Iterator<Gegenstaende> y = allGegenstaende.iterator();
         while (y.hasNext()) {
             Gegenstaende g = y.next();
@@ -29,7 +29,7 @@ public class GegenstaendeContainer implements  Iterable<Gegenstaende>{
         }
 
         return false;
-    }*/
+    }
 
     public Schluessel getSchluessel(String id) {
 
@@ -42,9 +42,16 @@ public class GegenstaendeContainer implements  Iterable<Gegenstaende>{
         return null;
     }
 
+    public Buch getBuch(String id) {
 
+        for(Gegenstaende g : allGegenstaende) {
 
-
+            if (g.getId().equals(id) && g instanceof Buch) {
+                return (Buch) g;
+            }
+        }
+        return null;
+    }
 
 
     public void printAllGegenstaende() {

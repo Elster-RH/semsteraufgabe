@@ -49,6 +49,20 @@ public class lentSchluessel extends JDialog  {
 
             key = container.getSchluessel(keyId.getText());
             student = studentContainer.getStudent(email.getText());
+            if (student == null) {
+                try {
+                    throw new RentalSystemException.EMailNotFound();
+                } catch (RentalSystemException.EMailNotFound ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+                    clear();
+                    return;
+                }
+            }
+            try {
+                key.getLent();
+            }catch(RentalSystemException.NotAvailable ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+            }
             key.setLentdate();
             key.setLentduration(lentduration.getText());
             key.addStudent(student);

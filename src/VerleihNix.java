@@ -17,7 +17,7 @@ public class VerleihNix extends JFrame {
 
 
         JButton studentbutton = new JButton("Neuen Studenten anlegen");
-        JButton bookbutton = new JButton("Objekt hinzufügen");
+        JButton bookbutton = new JButton("Neues Buch anlegen");
         JButton keyButton = new JButton("Neuen Schlüssel anlegen");
         JButton closebutton = new JButton("Schließen");
         JButton lentkeybutton = new JButton("Schluessel verleihen");

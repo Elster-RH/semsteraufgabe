@@ -70,7 +70,7 @@ public class Student {
     @Override
     public String toString() {
         return  address + ";" + eMail + ";" + firstName  + ";" + lastName
-                 + ";" +  phoneNumber;
+                 + ";" +  phoneNumber + "\n";
     }
 
     @Override
