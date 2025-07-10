@@ -1,42 +1,49 @@
 public class Address {
+    //Attribute von Address
     private String road;
     private String houseNumber;
     private String postCode;
     private String city;
 
+    //Konstruktort
     public Address(String road, String houseNumber, String postCode, String city) throws RentalSystemException {
-        this.road = road;
-        this.houseNumber = houseNumber;
-        this.postCode = postCode;
-        this.city = city;
+        setRoad(road);
+        setHouseNumber(houseNumber);
+        setPostCode(postCode);
+        setCity(city);
     }
 
-    /*
+    //get-Operatoren
     public String getRoad() {
         return road;
-    }
-    public void setRoad(String road) {
-        this.road = road;
     }
     public String getHouseNumber() {
         return houseNumber;
     }
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-    public int getPostCode() {
+    public String getPostCode() {
         return postCode;
-    }
-    public void setPostCode(int postCode) {
-        this.postCode = postCode;
     }
     public String getCity() {
         return city;
     }
+
+    //set-Operatoren
+    public void setRoad(String road) {
+        this.road = road;
+    }
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+    public void setPostCode(String postCode) throws RentalSystemException {
+        /*if(postCode.length() != 5) {                      //überprüfe ob postCode 5 Stellen hat
+            throw new RentalSystemException.WrongInput();
+        }*/
+        this.postCode = postCode;
+    }
     public void setCity(String city) {
         this.city = city;
     }
-    */
+
     @Override
     public String toString() {
         return road + ";" + houseNumber + ";" + postCode + ";" + city;

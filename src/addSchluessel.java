@@ -6,15 +6,13 @@ import java.io.IOException;
 public class addSchluessel extends JDialog {
 
     private GegenstaendeContainer container;
-    private Schluessel key;
-    private Student student;
 
     private JTextField kommentar;
     private JTextField Schliesst;
 
 
     public addSchluessel(Frame parent, GegenstaendeContainer container) throws HeadlessException {
-        super(parent, "Schlüssel hinzufügen", true);
+        super(parent, "Schlüssel hinzufügen", true); // erstelle Fenster um ein schlüssel-objekt hinzuzufügen
         this.container = container;
         setSize(500, 300);
 
@@ -26,8 +24,8 @@ public class addSchluessel extends JDialog {
 
         keyPanel.setLayout(new GridLayout(2,2));
         keyPanel.add(kommentarLabel);
-        kommentar = new JTextField();
-        keyPanel.add(kommentar);
+        kommentar = new JTextField();        // hier die werte der variablen im fenster eintrage
+        keyPanel.add(kommentar);             // die nötig sind um ein schlüssel objekt zu erstellen
         keyPanel.add(bezeichnungLabel);
         Schliesst = new JTextField();
         keyPanel.add(Schliesst);
@@ -35,10 +33,10 @@ public class addSchluessel extends JDialog {
         JButton addButton = new JButton("Schlüssel hinzufügen");
         JButton cancelButton = new JButton("Schließen");
 
-        addButton.addActionListener(e -> {
+        addButton.addActionListener(e -> { // Button zu hinzufügen eines Schlüssels
 
             try {
-                save();
+                save(); // speichermethode
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(this, "Fehler beim Schreiben der Datei:\n" + ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
             } catch (RentalSystemException.EmptyField ex) {
@@ -59,9 +57,9 @@ public class addSchluessel extends JDialog {
 
         });
         cancelButton.addActionListener(e -> {
-            for(Gegenstaende jay : container)
-                System.out.println(jay);
-            dispose();
+            for(Gegenstaende jay : container) // gibt den Container auf der komandozeile aus (nur zur kontrolle)
+                System.out.println(jay);      // final entfernen
+            dispose();                        // schliesst fentser
         });
         buttonPanel.add(addButton);
         buttonPanel.add(cancelButton);
@@ -72,26 +70,27 @@ public class addSchluessel extends JDialog {
     }
 
 
+    // Methode zum erstellen eines (schlüssel) objekts anhand der eingabe des Nutzers
     private void save() throws IOException, RentalSystemException.EmptyField {
 
-        key = new Schluessel(kommentar.getText(), Schliesst.getText());
+        Schluessel key = new Schluessel(kommentar.getText(), Schliesst.getText()); // schlüssel konstruktor
 
-        container.addGegenstand(key);
+        container.addGegenstand(key);                                             // Fügt schlüssel zu container hinzu
 
-        try(FileWriter wirter = new FileWriter("Buch.csv", true)) {
-
-            wirter.write(key.toString());
+        try(FileWriter wirter = new FileWriter("Buch.csv", true)) {  // Methode zum hinzufügen des angelegten
+                                                                                     // Schlüssels zu der CSV Datei. arbeitet mit der
+            wirter.write(key.toString());                                            // toString-Methode des Objekts
 
         } catch(IOException e) {
             e.printStackTrace();
         }
 
-        clear();
+        clear();                                                                    // Löscht die Eingabe des Useres
 
     }
 
     private void clear() {
-        kommentar.setText("");
+        kommentar.setText("");                                                     // setzt die eingabefelder zurück
         Schliesst.setText("");
 
     }

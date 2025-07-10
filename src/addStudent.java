@@ -20,7 +20,7 @@ public class addStudent extends JDialog {
 
 
     public addStudent(JFrame parent, StudentContainer container) {
-        super(parent, "Student hinzufügen", true);
+        super(parent, "Student hinzufügen", true);  // erstelle Fenster um ein studenten-objekt hinzuzufügen
         this.container = container;
 
         setSize(500, 250);
@@ -34,7 +34,7 @@ public class addStudent extends JDialog {
         addressPanel.setBorder(BorderFactory.createTitledBorder("Adresse"));
 
 
-        JLabel studentName = new JLabel("Name:");
+        JLabel studentName = new JLabel("Name:");                               //fetlegen der Labels(text auf dem Fenster
         JLabel studentName2 = new JLabel("Nachname:");
         JLabel studentEmail = new JLabel("Email:");
         JLabel studentPhone = new JLabel("Telefonnummer:");
@@ -48,8 +48,8 @@ public class addStudent extends JDialog {
 
 
         addressPanel.add(roadLabel);
-        road = new JTextField(20);
-        addressPanel.add(road);
+        road = new JTextField(20);                                          // hier die werte der variablen im fenster eintrage
+        addressPanel.add(road);                                                     // die nötig sind um ein schlüssel objekt zu erstellen
         addressPanel.add(houseNumberLabel);
         houseNumber = new JTextField(20);
         addressPanel.add(houseNumber);
@@ -82,9 +82,9 @@ public class addStudent extends JDialog {
         buttonPanel.add(removeButton);
         buttonPanel.add(cancelButton);
         cancelButton.addActionListener(e -> {
-            for(Student jay : container)
-                System.out.println(jay);
-            dispose();
+            for(Student jay : container)        // gibt den Container auf der komandozeile aus (nur zur kontrolle)
+                System.out.println(jay);        // final entfernen
+            dispose();                          // schliesst fentser
         });
         addButton.addActionListener(e -> {
             try {
@@ -108,19 +108,19 @@ public class addStudent extends JDialog {
         });
         removeButton.addActionListener(e -> {
 
-          if (!(container.removeStudent(email.getText()))){
+          if (!(container.removeStudent(email.getText()))){         // hier wird ein Student aus dem Register zu entfernen
               try {
                   throw new RentalSystemException.EMailNotFound();
-              } catch (RentalSystemException.EMailNotFound ex) {
+              } catch (RentalSystemException.EMailNotFound ex) {   // wirft einen fehler wenn der student nicht vorhanden ist oder die email falsch ist
                   JOptionPane.showMessageDialog(this, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
                   clear();
-                  return;
+                  return;                                         //beendet die Methode
               }
           }
 
             try(FileWriter wirter = new FileWriter("Student.csv")) {
 
-                for (Student g : container) {
+                for (Student g : container) {                       // geht durch jedes Objekt im container
 
                     wirter.write(g.toString());
                 }
@@ -136,32 +136,30 @@ public class addStudent extends JDialog {
         add(addressPanel, BorderLayout.CENTER);
     }
 
+    // Methode zum erstellen eines (Studenten)- und (Address)-objekts anhand der eingabe des Nutzers
     private void save() throws IOException, RentalSystemException {
 
-        Address address = new Address(road.getText(), houseNumber.getText(), postalCode.getText(),
+        Address address = new Address(road.getText(), houseNumber.getText(), postalCode.getText(),         //address konstruktor
                 city.getText());
 
+        // studenten konstruktor
         Student student = new Student(email.getText(), name.getText(), lastName.getText(), phoneNumber.getText(), address);
 
-        if (studentExists(student.geteMail())) {
-            throw new RentalSystemException.EmailAlreadyExists();
-        }
+        container.addStudent(student);                                                                // hinzufügen des studenten im container
 
-        container.addStudent(student);
-
-        try(FileWriter writer = new FileWriter("Student.csv", true)) {
-
-            writer.write(student.toString());
+        try(FileWriter writer = new FileWriter("Student.csv", true)) {          // "fügt" denn studenten der CSV datei "Hinzu"
+                                                                                                // dafür sorgt das true in new FileWriter
+            writer.write(student.toString());                                                   // wäre es nicht da würde immer eine neue datei angelgt/überschrieben
         } catch(IOException e) {
             e.printStackTrace();
         }
 
-        clear();
+        clear();                                                              // Löscht die Eingabe des Useres
 
     }
 
     private void clear() {
-        name.setText("");
+        name.setText("");                                                    // setzt die eingabefelder zurück
         lastName.setText("");
         email.setText("");
         phoneNumber.setText("");
@@ -170,20 +168,5 @@ public class addStudent extends JDialog {
         houseNumber.setText("");
         postalCode.setText("");
 
-    }
-
-    private boolean studentExists(String email) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("Student.csv"))) {
-            String check;
-            while ((check = reader.readLine()) != null) {
-                String[] parts = check.split(",");
-                if (parts.length > 0 && parts[0].equalsIgnoreCase(email.trim())) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 }

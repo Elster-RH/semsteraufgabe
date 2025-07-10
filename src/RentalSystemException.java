@@ -38,6 +38,10 @@ public class RentalSystemException extends Exception {
             super("Bereits verliehen.");
         }
     }
+
+    static class WrongInput extends RentalSystemException {
+        public WrongInput() {super("Falsche Eingabe");}
+    }
 }
 
 
