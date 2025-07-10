@@ -2,12 +2,14 @@ import java.time.LocalDate;
 
 public class copyBook {
 
+    private static int aktuelleId = 0;
+
     private String modNumber;
     private Student student;
-    private LocalDate backDate;
-    private LocalDate lentduration;
-    private int pfand;
-    private final LocalDate lentDate = LocalDate.now();
+    private String lentduration;
+    private String pfand;
+    private boolean lent;
+    private String lentDate;
     public enum Condition {
         POOR, FAIR, GOOD, VERY_GOOD, LIKE_NEW
     }
@@ -15,32 +17,60 @@ public class copyBook {
 
 
 
-    public copyBook(String modNumber, Condition condition) throws RentalSystemException{
-        setModNumber(modNumber);
+    public copyBook(Condition condition) throws RentalSystemException{
+        modNumber = aktuelleId();
         setCondition(condition);
+        student = null;
+        setLent();
+        pfand = null;
+        lentduration = null;
+        lentDate = null;
 
     }
 
-    public void setModNumber(String modNumber) throws RentalSystemException.EmptyField {
-        if (modNumber == null || modNumber.isEmpty()) {
-            throw new RentalSystemException.EmptyField();
+    public String aktuelleId(){
+        aktuelleId++;
+        String s = String.valueOf(aktuelleId);
+        return s;
+    }
+
+    public void setLent() {
+        if(student == null) {
+            lent = true;
+        }else {
+            lent = false;
         }
-        this.modNumber = modNumber;
     }
 
-    public void setLentduration(LocalDate lentduration) {
-        this.lentduration = lentduration;
+    public boolean getLent(){
+        return lent;
     }
 
-    public void setStundent(Student student) {
+    public void setLentdate(){
+
+        LocalDate ld = LocalDate.now();
+        String date = ld.toString();
+        lentDate = date;
+    }
+
+    public void setLentduration(String lentduration) {
+        String input = lentDate ;
+        int zahl = Integer.parseInt(lentduration);
+        LocalDate date = LocalDate.parse(input);
+        date = date.plusDays(zahl);
+        String date2 = date.toString();
+        this.lentduration = date2;
+    }
+
+    public void addStundent(Student student) {
         this.student = student;
     }
 
-    public void setPfand(int pfand) throws RentalSystemException {
-        if (pfand > 0) {
+    public void setPfand(String pfand) throws RentalSystemException {
+        if (pfand == null) {
             this.pfand = pfand;
         } else {
-            throw new RentalSystemException("Pfand zu klein");
+            throw new RentalSystemException.EmptyField();
         }
     }
 
@@ -52,10 +82,7 @@ public class copyBook {
 
     }
 
-    public void addBackDate(int backDate) throws RentalSystemException {
-        LocalDate back = lentDate.plusDays(backDate);
-        this.backDate = back ;
-    }
+
 
     public Condition getCondition() {
         return condition;
@@ -68,7 +95,7 @@ public class copyBook {
         return student;
     }
 
-    public int getPfand() {
+    public String getPfand() {
         return pfand;
     }
 }

@@ -2,13 +2,13 @@ import java.util.ArrayList;
 
 public class Buch extends Gegenstaende {
 
-    private static int aktuelleBuchId = 0;
+
 
     private int amount;
     private boolean firstlent;
     private boolean outtofstock;
     private String title;
-    private ArrayList<copyBook> amountCopys;
+    private ArrayList<copyBook> amountCopys = new ArrayList<copyBook>();
 
   public Buch(String kommentar, String title, int amount) throws RentalSystemException {
         super(kommentar,"buch");
@@ -17,15 +17,13 @@ public class Buch extends Gegenstaende {
         setTitle(title);
         firstlent = true;
         outtofstock = true;
-        amountCopys = new ArrayList<copyBook>();
-
   }
 
     public void addCopy(copyBook copyBook) throws RentalSystemException {
-        if(amountCopys.size() == amount){
-            throw new RentalSystemException("Das Lager hat keine nicht eingetragenen Kopien des Buches mehr");
+        if(amountCopys.size() > amount){
+            throw new RentalSystemException("Das Lager ist voll");
         }
-      while (amountCopys.size() < amount) {
+      while (amountCopys.size() <= amount) {
           amountCopys.add(copyBook);
         }
     }
@@ -45,12 +43,27 @@ public class Buch extends Gegenstaende {
       }
     }
 
-    public void setFirstlent(boolean firstlent) {
-      this.firstlent = firstlent;
+    public void setFirstlent() {
+      for(copyBook copyBook : amountCopys){
+          if(!(copyBook.getLent())){
+              this.firstlent = false;
+              break;
+          }
+      }
     }
 
-    public void setOuttofstock(boolean outtofstock) {
-      this.outtofstock = outtofstock;
+    public void setOuttofstock() {
+        for(copyBook copyBook : amountCopys){
+            if(!(copyBook.getLent())){
+                this.outtofstock = false;
+            }else {
+                this.outtofstock = true;
+            }
+            if (outtofstock) {
+                break;
+            }
+        }
+
     }
 
 
@@ -59,9 +72,7 @@ public class Buch extends Gegenstaende {
     public String getBezeichnung() {
         return bezeichnung;
     }
-    public static int getaktuelleBuchId(){
-        return aktuelleBuchId;
-    }
+
     public int getAmount() {
       return amount;
     }
@@ -91,7 +102,7 @@ public class Buch extends Gegenstaende {
         } else throw new RentalSystemException("nur " + amountCopys.size() + " Eingetragen");
     }
 
-    public int getPfandArray(int index) throws RentalSystemException {
+    public String getPfandArray(int index) throws RentalSystemException {
         if(index >= amountCopys.size()) {
             return amountCopys.get(index).getPfand();
         } else throw new RentalSystemException("nur " + amountCopys.size() + " Eingetragen");
@@ -109,7 +120,7 @@ public class Buch extends Gegenstaende {
 
     @Override
     public String toString() {
-        return "\n" + ",\n  kommentar: '" + kommentar + '\'' + ",\n  bezeichnung: '" + bezeichnung + '\'' + ",\n  modNumber: '"  + "\n}";
+        return bezeichnung + ";" + kommentar +  ";" + title +  "\n";
     }
 
 

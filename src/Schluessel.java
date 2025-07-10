@@ -9,20 +9,18 @@ public class Schluessel extends Gegenstaende {
   private String pfand;
   private String lentdate;
   private String lentduration;
-  private String backdate;
+
 
 
   public Schluessel(String kommentar, String schliesst) throws RentalSystemException.EmptyField {
 
     super(kommentar, "schluessel");
 
-
     setSchliesst(schliesst);
     student = null;
     setLent();
     lentdate = null;
     lentduration = null;
-    backdate = null;
     pfand = null;
   }
 
@@ -35,7 +33,7 @@ public class Schluessel extends Gegenstaende {
     this.pfand = pfand;
     this.lentdate = lentdate;
     this.lentduration = lentduration;
-    this.backdate = null;
+
   }
 
   public Schluessel(String kommentar, String schliesst, String pfand, String lentdate, String lentduration) throws RentalSystemException.EmptyField {
@@ -48,7 +46,7 @@ public class Schluessel extends Gegenstaende {
     this.pfand = pfand;
     this.lentdate = lentdate;
     this.lentduration = lentduration;
-    this.backdate = null;
+
   }
 
 
@@ -112,9 +110,9 @@ public class Schluessel extends Gegenstaende {
   @Override
   public String toString() {
     if(student == null) {
-      return bezeichnung+ ";" + id + ";" + kommentar + ";" + schliesst + ";" + student + ";" + pfand + ";" + lentdate + ";" + lentduration + ";" + backdate + "\n";
+      return bezeichnung+ ";" + id + ";" + kommentar + ";" + schliesst + ";" + student + ";" + pfand + ";" + lentdate + ";" + lentduration + ";" + "\n";
     }
-    return bezeichnung+ ";" + id + ";" + kommentar + ";" + schliesst + ";" + student.geteMail() + ";" + pfand + ";" + lentdate + ";" + lentduration + ";" + backdate + "\n";
+    return bezeichnung+ ";" + id + ";" + kommentar + ";" + schliesst + ";" + student.geteMail() + ";" + pfand + ";" + lentdate + ";" + lentduration + ";" + "\n";
   }
 
   @Override
