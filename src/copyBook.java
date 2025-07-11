@@ -64,6 +64,7 @@ public class copyBook {
 
     public void addStundent(Student student) {
         this.student = student;
+        setLent();
     }
 
     public void setPfand(String pfand) throws RentalSystemException {
@@ -81,20 +82,34 @@ public class copyBook {
         this.condition = condition;
 
     }
+@Override
+public String toString(){
+       StringBuilder copies = new StringBuilder();
+       copies.append(modNumber)
+               .append(";")
+               .append(student.geteMail())
+               .append(";")
+               .append(lentduration)
+               .append(";")
+               .append(lentDate)
+               .append(";")
+               .append(pfand)
+               .append(";")
+               .append(condition);
 
+        return copies.toString();
+}
 
 
     public Condition getCondition() {
         return condition;
     }
-
     public String getModNumber() {
         return modNumber;
     }
     public Student getStudent() {
         return student;
     }
-
     public String getPfand() {
         return pfand;
     }

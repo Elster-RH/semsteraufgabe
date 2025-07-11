@@ -120,7 +120,44 @@ public class Buch extends Gegenstaende {
 
     @Override
     public String toString() {
-        return bezeichnung + ";" + kommentar +  ";" + title +  "\n";
+      StringBuilder book =  new StringBuilder();
+
+        if(amount == 0){
+            book.append(bezeichnung)
+                    .append(";")
+                    .append(id)
+                    .append(";")
+                    .append(title)
+                    .append(";")
+                    .append(amount)
+                    .append(";")
+                    .append(firstlent)
+                    .append(";")
+                    .append(outtofstock)
+                    .append(";")
+                    .append("Keine Kopien im Lager!");
+        } else if (amount < 0) {
+            book.append(bezeichnung)
+                    .append(";")
+                    .append(id)
+                    .append(";")
+                    .append(title)
+                    .append(";")
+                    .append(amount)
+                    .append(";")
+                    .append(firstlent)
+                    .append(";")
+                    .append(outtofstock)
+                    .append(";");
+                    for(int i = 0;i < amountCopys.size(); i++){
+                        book.append("CopyNr ")
+                                .append(i)
+                                .append(amountCopys.get(i).toString());
+                    }
+        }
+
+
+        return book.toString();
     }
 
 
