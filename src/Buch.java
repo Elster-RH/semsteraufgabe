@@ -23,9 +23,9 @@ public class Buch extends Gegenstaende {
         if(amountCopys.size() > amount){
             throw new RentalSystemException("Das Lager ist voll");
         }
-      while (amountCopys.size() <= amount) {
-          amountCopys.add(copyBook);
-        }
+
+        amountCopys.add(copyBook);
+
     }
 
 
@@ -91,19 +91,19 @@ public class Buch extends Gegenstaende {
         return "Array";
     }
     public copyBook.Condition  getconditionArray(int index) throws RentalSystemException {
-        if(index >= amountCopys.size()) {
+        if(index <= amountCopys.size()) {
             return amountCopys.get(index).getCondition();
         } else throw new RentalSystemException("nur " + amountCopys.size() + " Eingetragen");
     }
 
     public Student getstudentArray(int index) throws RentalSystemException {
-        if(index >= amountCopys.size()) {
+        if(index <= amountCopys.size()) {
             return amountCopys.get(index).getStudent();
         } else throw new RentalSystemException("nur " + amountCopys.size() + " Eingetragen");
     }
 
     public String getPfandArray(int index) throws RentalSystemException {
-        if(index >= amountCopys.size()) {
+        if(index <= amountCopys.size()) {
             return amountCopys.get(index).getPfand();
         } else throw new RentalSystemException("nur " + amountCopys.size() + " Eingetragen");
     }
@@ -122,42 +122,23 @@ public class Buch extends Gegenstaende {
     public String toString() {
       StringBuilder book =  new StringBuilder();
 
-        if(amount == 0){
-            book.append(bezeichnung)
-                    .append(";")
-                    .append(id)
-                    .append(";")
-                    .append(title)
-                    .append(";")
-                    .append(amount)
-                    .append(";")
-                    .append(firstlent)
-                    .append(";")
-                    .append(outtofstock)
-                    .append(";")
-                    .append("Keine Kopien im Lager!");
-        } else if (amount < 0) {
-            book.append(bezeichnung)
-                    .append(";")
-                    .append(id)
-                    .append(";")
-                    .append(title)
-                    .append(";")
-                    .append(amount)
-                    .append(";")
-                    .append(firstlent)
-                    .append(";")
-                    .append(outtofstock)
-                    .append(";");
-                    for(int i = 0;i < amountCopys.size(); i++){
-                        book.append("CopyNr ")
-                                .append(i)
-                                .append(amountCopys.get(i).toString());
-                    }
+      book.append(bezeichnung)
+              .append(";")
+              .append(kommentar)
+              .append(";")
+              .append(id)
+              .append(";")
+              .append(title)
+              .append(";")
+              .append(amount)
+              .append(";");
+
+        for (copyBook amountCopy : amountCopys) {
+            book.append(amountCopy.toString());
         }
+        book.append("\n");
 
-
-        return book.toString();
+      return book.toString();
     }
 
 

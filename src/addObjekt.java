@@ -8,12 +8,10 @@ public class addObjekt extends JDialog {
 
         private GegenstaendeContainer container;
         private Buch buch;
-        //private Buch.Condition condition;
 
         private JTextField kommentar;
-        private JTextField bezeichnung;
-        private JTextField modNumber;
-        private JTextField coindition;
+        private JTextField title;
+        private JTextField amount;
 
 
     public addObjekt(Frame parent, GegenstaendeContainer container) {
@@ -28,28 +26,29 @@ public class addObjekt extends JDialog {
             buchPanel.setLayout(new GridLayout(4, 2));
 
             JLabel kommentarLabel= new JLabel("Kommentar:");
-            JLabel bezeichnungLabel = new JLabel("Bezeichnung:");
-            JLabel modNumberLabel = new JLabel("Mod Number:");
-            JLabel coinditioLabel = new JLabel("Zustand:");
+            JLabel titleLabel= new JLabel("Title:");
+            JLabel amountLabel= new JLabel("Anzahl:");
 
-            //JComboBox<Buch.Condition> conditionComboBox = new JComboBox<>(Buch.Condition.values());
 
-            objektPanel.setLayout(new GridLayout(3, 2));
+
+
+
+
+            objektPanel.setLayout(new GridLayout(2, 2));
             buchPanel.add(kommentarLabel);
             kommentar = new JTextField();
             buchPanel.add(kommentar);
-            buchPanel.add(bezeichnungLabel);
-            bezeichnung = new JTextField();
-            buchPanel.add(bezeichnung);
-            buchPanel.add(modNumberLabel);
-            modNumber = new JTextField();
-            buchPanel.add(modNumber);
-            buchPanel.add(coinditioLabel);
-            coindition = new JTextField();
-            //buchPanel.add(conditionComboBox);
+            buchPanel.add(titleLabel);
+            title = new JTextField();
+            buchPanel.add(title);
+            buchPanel.add(amountLabel);
+            amount = new JTextField();
+            buchPanel.add(amount);
 
-            JButton addButton = new JButton("Objekt hinzufügen");
-            JButton removeButton = new JButton("Objekt entfernen");
+
+
+            JButton addButton = new JButton("Neues Buch anlegen");
+            JButton removeButton = new JButton("Test");
             JButton cancelButton = new JButton("Schließen");
 
             buttonPanel.add(addButton);
@@ -61,46 +60,32 @@ public class addObjekt extends JDialog {
                 });
                 addButton.addActionListener(e -> {
 
-                    //condition = (Buch.Condition) conditionComboBox.getSelectedItem();
+                    int a = Integer.parseInt(amount.getText());
+
                     try {
-                        save();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
+                        buch = new Buch(kommentar.getText(), title.getText(), a);
                     } catch (RentalSystemException ex) {
-                        ex.getMessage();
+                        throw new RuntimeException(ex);
                     }
+
+
+
+                        addcopyBook objekt = new addcopyBook(this, buch, container, a);
+                        objekt.setVisible(true);
+
+                        clear();
+
                 });
 
                 add(buttonPanel, BorderLayout.SOUTH);
                 add(buchPanel, BorderLayout.NORTH);
             }
 
-            private void save() throws IOException, RentalSystemException {
 
-
-
-                //buch = new Buch(kommentar.getText(), bezeichnung.getText());
-
-                container.addGegenstand(buch);
-
-
-
-
-                try(FileWriter wirter = new FileWriter("Buch.csv", true)) {
-
-                    wirter.write(buch.toString());
-                } catch(IOException e) {
-                    e.printStackTrace();
-                }
-
-                clear();
-
-            }
 
             private void clear() {
                 kommentar.setText("");
-                bezeichnung.setText("");
-                modNumber.setText("");
-                coindition.setText("");
+                title.setText("");
+                amount.setText("");
             }
         }

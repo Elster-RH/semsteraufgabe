@@ -17,8 +17,8 @@ public class copyBook {
 
 
 
-    public copyBook(Condition condition) throws RentalSystemException{
-        modNumber = aktuelleId();
+    public copyBook(String modNumber, Condition condition) throws RentalSystemException{
+        this.modNumber = modNumber;
         setCondition(condition);
         student = null;
         setLent();
@@ -85,17 +85,34 @@ public class copyBook {
 @Override
 public String toString(){
        StringBuilder copies = new StringBuilder();
-       copies.append(modNumber)
-               .append(";")
-               .append(student.geteMail())
-               .append(";")
-               .append(lentduration)
-               .append(";")
-               .append(lentDate)
-               .append(";")
-               .append(pfand)
-               .append(";")
-               .append(condition);
+       if (student != null) {
+           copies.append(modNumber)
+                   .append(";")
+                   .append(student.geteMail())
+                   .append(";")
+                   .append(lentduration)
+                   .append(";")
+                   .append(lentDate)
+                   .append(";")
+                   .append(pfand)
+                   .append(";")
+                   .append(condition)
+                   .append(";");
+       }else {
+           copies.append(modNumber)
+                   .append(";")
+                   .append(student)
+                   .append(";")
+                   .append(lentduration)
+                   .append(";")
+                   .append(lentDate)
+                   .append(";")
+                   .append(pfand)
+                   .append(";")
+                   .append(condition)
+                   .append(";");
+
+       }
 
         return copies.toString();
 }
