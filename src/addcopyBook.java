@@ -9,13 +9,13 @@ public class addcopyBook extends JDialog {
 
     GegenstaendeContainer container;
 
-    private JTextField modNumber = new JTextField();
     private copyBook.Condition condition;
 
     public addcopyBook(addObjekt parent, Buch buch, GegenstaendeContainer container, int n) {
         super(parent, "Bücher anlegen", true);
 
         final int[] clickCount = {0};
+        final int[] exNum = {1};
 
 
         this.container = container;
@@ -30,20 +30,19 @@ public class addcopyBook extends JDialog {
         JButton addButton = new JButton("Exemplar hinzufügen:");
         JButton saveButton = new JButton("Speichern");
 
-        JLabel modNumberLabel = new JLabel("Mod Number:");
+
         JLabel coinditioLabel = new JLabel("Zustand:");
 
         copyBookpanel.add(coinditioLabel);
         JComboBox<copyBook.Condition> conditionComboBox = new JComboBox<>(copyBook.Condition.values());
         copyBookpanel.add(conditionComboBox);
 
-        copyBookpanel.add(modNumberLabel);
-        copyBookpanel.add(modNumber);
-
         buttonPanel.add(addButton);
         buttonPanel.add(saveButton);
 
         addButton.addActionListener(e -> {
+
+
 
             if (clickCount[0] == n) {
                 JOptionPane.showMessageDialog(this, "Maximale Anzahl an Exemplaren erreicht");
@@ -53,15 +52,21 @@ public class addcopyBook extends JDialog {
             condition = (copyBook.Condition) conditionComboBox.getSelectedItem();
 
             try {
-                save(buch);
+                save(buch, exNum);
             } catch (RentalSystemException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
             }
 
             clickCount[0]++;
+            exNum[0]++;
         });
 
         saveButton.addActionListener(e -> {
+
+            if (clickCount[0] < n) {
+                JOptionPane.showMessageDialog(this, "Bitte geben sie allen Exemplaren eine Zustand");
+                return;
+            }
 
             container.addGegenstand(buch);
 
@@ -85,17 +90,15 @@ public class addcopyBook extends JDialog {
 
     }
 
-    private void save(Buch buch) throws  RentalSystemException {
+    private void save(Buch buch, int[] exNum ) throws  RentalSystemException {
 
-        copyBook copy = new copyBook(modNumber.getText(), condition);
+        String s = Integer.toString(exNum[0]);
+
+        copyBook copy = new copyBook(s, condition);
 
         buch.addCopy(copy);
 
-        clear();
-
     }
 
-    private void clear() {
-        modNumber.setText("");
-    }
+
 }

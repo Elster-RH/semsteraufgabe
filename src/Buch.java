@@ -124,9 +124,9 @@ public class Buch extends Gegenstaende {
 
       book.append(bezeichnung)
               .append(";")
-              .append(kommentar)
-              .append(";")
               .append(id)
+              .append(";")
+              .append(kommentar)
               .append(";")
               .append(title)
               .append(";")

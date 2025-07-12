@@ -28,6 +28,28 @@ public class copyBook {
 
     }
 
+    public copyBook(String modNumber, String lentDate, String lentduration, String pfand, Condition condition) throws RentalSystemException{
+        this.modNumber = modNumber;
+        setCondition(condition);
+        student = null;
+        setLent();
+        this.pfand = pfand;
+        this.lentduration = lentduration;
+        this.lentDate = lentDate;
+
+    }
+
+    public copyBook(String modNumber,Student student, String lentDate, String lentduration, String pfand, Condition condition) throws RentalSystemException{
+        this.modNumber = modNumber;
+        setCondition(condition);
+        this.student = student;
+        setLent();
+        this.pfand = pfand;
+        this.lentduration = lentduration;
+        this.lentDate = lentDate;
+
+    }
+
     public String aktuelleId(){
         aktuelleId++;
         String s = String.valueOf(aktuelleId);

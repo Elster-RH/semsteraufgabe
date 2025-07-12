@@ -154,6 +154,61 @@ public class VerleihNix extends JFrame {
                     }
 
 
+
+
+                }else if (data[0].contains("buch")) {
+
+                    String comm = data[2];
+                    String title = data[3];
+                    int amount = Integer.parseInt(data[4]);
+
+                    copyBook copy;
+                    Buch buch;
+
+                    try {
+                        buch = new Buch(comm, title, amount);
+                    }catch (RentalSystemException e) {
+                        throw new RuntimeException(e);
+                    }
+
+
+
+                    for(int i = 5; i < 5 + (amount * 6); i = i + 6){
+                        if(data[i + 1].contains("null")) {
+                            String modNum = data[i];
+                            String lentdate = data[i + 2];
+                            String lentduration = data[i + 3];
+                            String pfand = data[i + 4];
+                            copyBook.Condition cond = copyBook.Condition.valueOf(data[i + 5]);
+
+                            try{
+                                copy = new copyBook(modNum, lentdate, lentduration, pfand, cond);
+                            } catch (RentalSystemException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }else {
+                            String modNum = data[i];
+                            String eMail = data[i + 1];
+                            String lentdate = data[i + 2];
+                            String lentduration = data[i + 3];
+                            String pfand = data[i + 4];
+                            copyBook.Condition cond = copyBook.Condition.valueOf(data[i + 5]);
+                            Student student = container.getStudent(eMail);
+                            i = i + 6;
+                            try{
+                                copy = new copyBook(modNum, student, lentdate, lentduration, pfand, cond);
+                            } catch (RentalSystemException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        try {
+                            buch.addCopy(copy);
+                        }catch (RentalSystemException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
+                    objContainer.addGegenstand(buch);
                 }
 
 
