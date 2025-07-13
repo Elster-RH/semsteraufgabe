@@ -69,7 +69,6 @@ public class lentSchluessel extends JDialog  {
             try {
                 key.setPfand(pfand.getText());
             }catch(RentalSystemException.EmptyField ex) {
-                ex.printStackTrace();
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
             }
 

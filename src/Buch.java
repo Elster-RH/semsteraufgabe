@@ -52,6 +52,15 @@ public class Buch extends Gegenstaende {
       }
     }
 
+    public copyBook getCopyBookByNumber(String copyNumber) {
+        for (copyBook c : amountCopys) {
+            if (c.getModNumber().equals(copyNumber)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
     public void setOuttofstock() {
         for(copyBook copyBook : amountCopys){
             if(!(copyBook.getLent())){

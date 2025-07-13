@@ -59,6 +59,8 @@ public class addcopyBook extends JDialog {
 
             clickCount[0]++;
             exNum[0]++;
+
+            JOptionPane.showMessageDialog(this, "Exemplaren hinzugefügt");
         });
 
         saveButton.addActionListener(e -> {

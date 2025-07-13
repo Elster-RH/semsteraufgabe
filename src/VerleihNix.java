@@ -21,13 +21,13 @@ public class VerleihNix extends JFrame {
         JButton keyButton = new JButton("Neuen Schlüssel anlegen");
         JButton closebutton = new JButton("Schließen");
         JButton lentkeybutton = new JButton("Schluessel verleihen");
-        JButton button5 = new JButton("Buch verleihen");
+        JButton lentBookbutton = new JButton("Buch verleihen");
         buttonPanel.add(studentbutton);
         buttonPanel.add(keyButton);
         buttonPanel.add(bookbutton);
         buttonPanel.add(closebutton);
         centerPanel.add(lentkeybutton);
-        centerPanel.add(button5);
+        centerPanel.add(lentBookbutton);
 
 
         closebutton.addActionListener(e -> {
@@ -45,10 +45,13 @@ public class VerleihNix extends JFrame {
             addSchluessel key = new addSchluessel(this, objContainer);
             key.setVisible(true);
         });
-
         lentkeybutton.addActionListener(e -> {
             lentSchluessel lentkey = new lentSchluessel(this, objContainer, container);
             lentkey.setVisible(true);
+        });
+        lentBookbutton.addActionListener(e -> {
+            lentBook lentBook = new lentBook(this, objContainer, container);
+            lentBook.setVisible(true);
         });
 
 

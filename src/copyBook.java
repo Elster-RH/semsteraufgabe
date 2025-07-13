@@ -84,17 +84,17 @@ public class copyBook {
         this.lentduration = date2;
     }
 
-    public void addStundent(Student student) {
+    public void addStudent(Student student) {
         this.student = student;
         setLent();
     }
 
-    public void setPfand(String pfand) throws RentalSystemException {
-        if (pfand == null) {
-            this.pfand = pfand;
-        } else {
+
+    public void setPfand(String pfand) throws RentalSystemException.EmptyField {
+        if (pfand == null || pfand.isEmpty()) {
             throw new RentalSystemException.EmptyField();
         }
+        this.pfand = pfand;
     }
 
     public void setCondition(Condition condition)throws RentalSystemException.EmptyField {
@@ -112,9 +112,9 @@ public String toString(){
                    .append(";")
                    .append(student.geteMail())
                    .append(";")
-                   .append(lentduration)
-                   .append(";")
                    .append(lentDate)
+                   .append(";")
+                   .append(lentduration)
                    .append(";")
                    .append(pfand)
                    .append(";")
@@ -125,9 +125,9 @@ public String toString(){
                    .append(";")
                    .append(student)
                    .append(";")
-                   .append(lentduration)
-                   .append(";")
                    .append(lentDate)
+                   .append(";")
+                   .append(lentduration)
                    .append(";")
                    .append(pfand)
                    .append(";")
