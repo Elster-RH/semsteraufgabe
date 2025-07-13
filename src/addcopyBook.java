@@ -27,7 +27,7 @@ public class addcopyBook extends JDialog {
 
         copyBookpanel.setLayout(new BoxLayout(copyBookpanel, BoxLayout.X_AXIS));
 
-        JButton addButton = new JButton("Exemplar hinzufügen:");
+        JButton addButton = new JButton("Exemplar hinzufügen");
         JButton saveButton = new JButton("Speichern");
 
 
@@ -60,7 +60,7 @@ public class addcopyBook extends JDialog {
             clickCount[0]++;
             exNum[0]++;
 
-            JOptionPane.showMessageDialog(this, "Exemplaren hinzugefügt");
+            JOptionPane.showMessageDialog(this, "Exemplar hinzugefügt");
         });
 
         saveButton.addActionListener(e -> {

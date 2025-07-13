@@ -24,7 +24,7 @@ public class lentSchluessel extends JDialog  {
         JPanel keyPanel = new JPanel();
         keyPanel.setLayout(new GridLayout(4, 2));
 
-        JLabel keyIdLabel = new JLabel("Schlüssel ID:");
+        JLabel keyIdLabel = new JLabel("ID:");
         JLabel pfandLabel = new JLabel("Pfand:");
         JLabel lentdurationLabel = new JLabel("Ausleihzeit in Tagen:");
         JLabel emailLabel = new JLabel("Email des Studenten:");
@@ -38,8 +38,8 @@ public class lentSchluessel extends JDialog  {
         keyPanel.add(emailLabel);
         keyPanel.add(email);
 
-        JButton saveButton = new JButton("Speicher");
-        JButton cancelButton = new JButton("Schliessen");
+        JButton saveButton = new JButton("Speichern");
+        JButton cancelButton = new JButton("Zurück");
 
         cancelButton.addActionListener(e -> {
             dispose();

@@ -140,12 +140,13 @@ public class Buch extends Gegenstaende {
               .append(title)
               .append(";")
               .append(amount)
-              .append(";");
+              .append(";")
+              .append("\n");
 
         for (copyBook amountCopy : amountCopys) {
             book.append(amountCopy.toString());
         }
-        book.append("\n");
+
 
       return book.toString();
     }

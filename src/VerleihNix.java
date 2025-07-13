@@ -10,24 +10,27 @@ public class VerleihNix extends JFrame {
         setSize(800, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel buttonPanel = new JPanel();
+        JPanel northPanel = new JPanel();
         JPanel centerPanel = new JPanel();
 
-        centerPanel.setLayout(new FlowLayout());
+        northPanel.setLayout(new FlowLayout());
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        JTextArea hinweisarea = new JTextArea("Willkommen bei Verleihnix ihrem Experten \n wenn es ums Verleihen geht.\nUms wiederbekommen müssen sie sich selbst kümmern.");
 
 
         JButton studentbutton = new JButton("Neuen Studenten anlegen");
         JButton bookbutton = new JButton("Neues Buch anlegen");
         JButton keyButton = new JButton("Neuen Schlüssel anlegen");
-        JButton closebutton = new JButton("Schließen");
-        JButton lentkeybutton = new JButton("Schluessel verleihen");
+        JButton closebutton = new JButton("Beenden");
+        JButton lentkeybutton = new JButton("Schlüssel verleihen");
         JButton lentBookbutton = new JButton("Buch verleihen");
         buttonPanel.add(studentbutton);
         buttonPanel.add(keyButton);
         buttonPanel.add(bookbutton);
         buttonPanel.add(closebutton);
-        centerPanel.add(lentkeybutton);
-        centerPanel.add(lentBookbutton);
+        northPanel.add(lentkeybutton);
+        northPanel.add(lentBookbutton);
 
 
         closebutton.addActionListener(e -> {
@@ -53,10 +56,15 @@ public class VerleihNix extends JFrame {
             lentBook lentBook = new lentBook(this, objContainer, container);
             lentBook.setVisible(true);
         });
+        centerPanel.setLayout(new FlowLayout());
+        centerPanel.add(hinweisarea);
 
 
         add(buttonPanel, BorderLayout.SOUTH);
+        add(northPanel, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
+
+        pack();
 
 
         setVisible(true);
@@ -176,7 +184,47 @@ public class VerleihNix extends JFrame {
 
 
 
-                    for(int i = 5; i < 5 + (amount * 6); i = i + 6){
+
+                    for (int i = 0; i < amount; i++) {
+                        try {
+                            zeile = in2.readLine();
+                        }catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        String[] data1 = zeile.split(";");
+
+                        if(data1[1].contains("null")) {
+
+                            String modNum = data1[0];
+                            String lentdate = data1[2];
+                            String lentduration = data1[3];
+                            String pfand = data1[4];
+                            copyBook.Condition cond = copyBook.Condition.valueOf(data1[5]);
+
+                            try{
+                                copy = new copyBook(modNum, lentdate, lentduration, pfand, cond);
+                            } catch (RentalSystemException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }else {
+                            String modNum = data1[0];
+                            String eMail = data1[1];
+                            String lentdate = data1[2];
+                            String lentduration = data1[3];
+                            String pfand = data1[4];
+                            copyBook.Condition cond = copyBook.Condition.valueOf(data1[5]);
+                            Student student = container.getStudent(eMail);
+
+                            try{
+                                copy = new copyBook(modNum, student, lentdate, lentduration, pfand, cond);
+                            } catch (RentalSystemException e) {
+                                throw new RuntimeException(e);
+                            }
+                    }
+
+                        //andere Methode
+                    /*for(int i = 5; i < 5 + (amount * 6); i = i + 6){
                         if(data[i + 1].contains("null")) {
                             String modNum = data[i];
                             String lentdate = data[i + 2];
@@ -197,13 +245,13 @@ public class VerleihNix extends JFrame {
                             String pfand = data[i + 4];
                             copyBook.Condition cond = copyBook.Condition.valueOf(data[i + 5]);
                             Student student = container.getStudent(eMail);
-                            i = i + 6;
+
                             try{
                                 copy = new copyBook(modNum, student, lentdate, lentduration, pfand, cond);
                             } catch (RentalSystemException e) {
                                 throw new RuntimeException(e);
                             }
-                        }
+                        }*/
                         try {
                             buch.addCopy(copy);
                         }catch (RentalSystemException e) {

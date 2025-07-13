@@ -29,12 +29,12 @@ public class addStudent extends JDialog {
         JPanel buttonPanel = new JPanel();
         JPanel studentPanel = new JPanel();
         JPanel addressPanel = new JPanel();
-        studentPanel.setLayout(new GridLayout(4,2));
+        studentPanel.setLayout(new GridLayout(5,2));
         addressPanel.setLayout(new GridLayout(4,2));
         addressPanel.setBorder(BorderFactory.createTitledBorder("Adresse"));
 
 
-        JLabel studentName = new JLabel("Name:");                               //fetlegen der Labels(text auf dem Fenster
+        JLabel studentName = new JLabel("Vorname:");                               //fetlegen der Labels(text auf dem Fenster
         JLabel studentName2 = new JLabel("Nachname:");
         JLabel studentEmail = new JLabel("Email:");
         JLabel studentPhone = new JLabel("Telefonnummer:");
@@ -44,9 +44,11 @@ public class addStudent extends JDialog {
         JLabel postalCodeLabel = new JLabel("PLZ:");
         JLabel cityLabel = new JLabel("Stadt:");
 
+        JTextArea hinweisarea = new JTextArea(" Zum Entfernen eines Student \n bitte nur dessen Email eingeben\n und denn entsprechenden Button drücken");
+        JTextArea hinweisarea2 = new JTextArea();
 
-
-
+        studentPanel.add(hinweisarea);
+        studentPanel.add(hinweisarea2);
         addressPanel.add(roadLabel);
         road = new JTextField(20);                                          // hier die werte der variablen im fenster eintrage
         addressPanel.add(road);                                                     // die nötig sind um ein schlüssel objekt zu erstellen
@@ -74,10 +76,9 @@ public class addStudent extends JDialog {
         phoneNumber = new JTextField(20);
         studentPanel.add(phoneNumber);
 
-
         JButton addButton = new JButton("Student hinzufügen");
         JButton removeButton = new JButton("Student entfernen");
-        JButton cancelButton = new JButton("Schließen");
+        JButton cancelButton = new JButton("Zurück");
         buttonPanel.add(addButton);
         buttonPanel.add(removeButton);
         buttonPanel.add(cancelButton);
@@ -131,9 +132,12 @@ public class addStudent extends JDialog {
             clear();
         });
 
+
         add(studentPanel, BorderLayout.NORTH);
         add(buttonPanel, BorderLayout.SOUTH);
         add(addressPanel, BorderLayout.CENTER);
+
+        pack();
     }
 
     // Methode zum erstellen eines (Studenten)- und (Address)-objekts anhand der eingabe des Nutzers

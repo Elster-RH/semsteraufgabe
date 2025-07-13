@@ -17,7 +17,7 @@ public class lentBook extends JDialog  {
     private JTextField email = new JTextField();
 
     public lentBook(Frame parent, GegenstaendeContainer container, StudentContainer studentContainer) {
-        super(parent, "Schluessel verleihen", true);
+        super(parent, "Buch verleihen", true);
         this.container = container;
 
         setSize(500, 300);
@@ -43,8 +43,8 @@ public class lentBook extends JDialog  {
         keyPanel.add(emailLabel);
         keyPanel.add(email);
 
-        JButton saveButton = new JButton("Speicher");
-        JButton cancelButton = new JButton("Schliessen");
+        JButton saveButton = new JButton("Speichern");
+        JButton cancelButton = new JButton("Zurück");
 
         cancelButton.addActionListener(e -> {
             dispose();

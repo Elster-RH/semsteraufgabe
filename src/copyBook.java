@@ -119,7 +119,8 @@ public String toString(){
                    .append(pfand)
                    .append(";")
                    .append(condition)
-                   .append(";");
+                   .append(";")
+                   .append("\n");
        }else {
            copies.append(modNumber)
                    .append(";")
@@ -132,8 +133,8 @@ public String toString(){
                    .append(pfand)
                    .append(";")
                    .append(condition)
-                   .append(";");
-
+                   .append(";")
+                   .append("\n");
        }
 
         return copies.toString();
