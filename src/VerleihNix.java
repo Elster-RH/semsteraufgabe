@@ -16,7 +16,7 @@ public class VerleihNix extends JFrame {
         northPanel.setLayout(new FlowLayout());
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        JTextArea hinweisarea = new JTextArea("Willkommen bei Verleihnix ihrem Experten \n wenn es ums Verleihen geht.\nUms wiederbekommen müssen sie sich selbst kümmern.");
+        JTextArea hinweisarea = new JTextArea("Willkommen bei Verleihnix ihrem Experten \n wenn es ums Verleihen geht.\nUms Wiederbekommen müssen Sie sich selbst kümmern.");
 
 
         JButton studentbutton = new JButton("Neuen Studenten anlegen");
