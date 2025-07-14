@@ -68,6 +68,12 @@ public class Schluessel extends Gegenstaende {
     this.pfand = pfand;
   }
 
+  public boolean checklentdate() {
+    LocalDate ld = LocalDate.parse(lentdate);
+    LocalDate bd = LocalDate.now();
+
+  }
+
   public void setLent() {
     if(student == null) {
       lent = true;

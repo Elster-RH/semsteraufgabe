@@ -25,12 +25,14 @@ public class VerleihNix extends JFrame {
         JButton closebutton = new JButton("Beenden");
         JButton lentkeybutton = new JButton("Schlüssel verleihen");
         JButton lentBookbutton = new JButton("Buch verleihen");
+        JButton backButton = new JButton("Zurückgeben");
         buttonPanel.add(studentbutton);
         buttonPanel.add(keyButton);
         buttonPanel.add(bookbutton);
         buttonPanel.add(closebutton);
         northPanel.add(lentkeybutton);
         northPanel.add(lentBookbutton);
+        northPanel.add(backButton);
 
 
         closebutton.addActionListener(e -> {
@@ -56,6 +58,9 @@ public class VerleihNix extends JFrame {
             lentBook lentBook = new lentBook(this, objContainer, container);
             lentBook.setVisible(true);
         });
+        backButton.addActionListener(e -> {
+
+        })
         centerPanel.setLayout(new FlowLayout());
         centerPanel.add(hinweisarea);
 
