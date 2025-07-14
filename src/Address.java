@@ -35,9 +35,9 @@ public class Address {
         this.houseNumber = houseNumber;
     }
     public void setPostCode(String postCode) throws RentalSystemException {
-        /*if(postCode.length() != 5) {                      //überprüfe ob postCode 5 Stellen hat
+        if(!postCode.matches("\\d{5}")) {                                                                                 //überprüfe ob postCode 5 Stellen hat
             throw new RentalSystemException.WrongInput();
-        }*/
+        }
         this.postCode = postCode;
     }
     public void setCity(String city) {
