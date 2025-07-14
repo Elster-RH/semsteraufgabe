@@ -71,6 +71,9 @@ public class Schluessel extends Gegenstaende {
   public String getLentduration() {
     return lentduration;
   }
+  public Student getStudent() {
+    return student;
+  }
 
   public void setPfand(String pfand) throws RentalSystemException.EmptyField {
     if (pfand == null || pfand.isEmpty()) {

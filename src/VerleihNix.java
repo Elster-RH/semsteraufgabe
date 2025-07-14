@@ -109,7 +109,8 @@ public class VerleihNix extends JFrame {
                                 .append("Schliesst:").append(key.getSchliesst()).append("\n")
                                 .append("Hinterlegtes Pfand:").append(key.getPfand()).append("\n")
                                 .append("Ausgeliehen seit:").append(key.getLentdate()).append("\n")
-                                .append("Ausgeliehen bis:").append(key.getLentduration()).append("\n");
+                                .append("Ausgeliehen bis:").append(key.getLentduration()).append("\n")
+                                .append("Ausgeliehen von:").append(key.getStudent()).append("\n");
 
                         wirter.write(be.toString());
                     }
@@ -130,7 +131,8 @@ public class VerleihNix extends JFrame {
                                     .append("Exemplar Nummer").append(copy.getModNumber()).append("\n")
                                     .append("Hinterlegtes Pfand:").append(copy.getPfand()).append("\n")
                                     .append("Ausgeliehen seit:").append(copy.getLentDate()).append("\n")
-                                    .append("Ausgeliehen bis:").append(copy.getLentduration()).append("\n");
+                                    .append("Ausgeliehen bis:").append(copy.getLentduration()).append("\n")
+                                    .append("Ausgeliehen von:").append(copy.getStudent()).append("\n");
 
                             wirter.write(be.toString());
                         }
@@ -165,7 +167,8 @@ public class VerleihNix extends JFrame {
                                     .append("Schliesst:").append(key.getSchliesst()).append("\n")
                                     .append("Hinterlegtes Pfand:").append(key.getPfand()).append("\n")
                                     .append("Ausgeliehen seit:").append(key.getLentdate()).append("\n")
-                                    .append("Ausgeliehen bis:").append(key.getLentduration()).append("\n");
+                                    .append("Ausgeliehen bis:").append(key.getLentduration()).append("\n")
+                                    .append("Ausgeliehen von:").append(key.getStudent()).append("\n");
 
                         wirter.write(be.toString());
                     }
@@ -188,7 +191,8 @@ public class VerleihNix extends JFrame {
                                         .append("Exemplar Nummer").append(copy.getModNumber()).append("\n")
                                         .append("Hinterlegtes Pfand:").append(copy.getPfand()).append("\n")
                                         .append("Ausgeliehen seit:").append(copy.getLentDate()).append("\n")
-                                        .append("Ausgeliehen bis:").append(copy.getLentduration()).append("\n");
+                                        .append("Ausgeliehen bis:").append(copy.getLentduration()).append("\n")
+                                        .append("Ausgeliehen von:").append(copy.getStudent()).append("\n");
 
                             wirter.write(be.toString());
                         }
