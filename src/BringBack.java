@@ -49,11 +49,11 @@ public class BringBack extends JDialog {
 
             if(key != null ) {
                 if(!key.checklentdate())
-                try {
-                    throw new RentalSystemException.toLate();
-                }catch (RentalSystemException.toLate  e1) {
-                    JOptionPane.showMessageDialog(this,e1.getMessage());
-                }
+                    try {
+                        throw new RentalSystemException.toLate();
+                    }catch (RentalSystemException.toLate  e1) {
+                        JOptionPane.showMessageDialog(this,e1.getMessage());
+                    }
 
                 key.bringBack();
             }

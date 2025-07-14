@@ -17,7 +17,7 @@ public class lentBook extends JDialog  {
     private JTextField email = new JTextField();
 
     public lentBook(Frame parent, GegenstaendeContainer container, StudentContainer studentContainer) {
-        super(parent, "Buch verleihen", true);
+        super(parent, "Gegenstand verleihen", true);
         this.container = container;
 
         setSize(500, 300);

@@ -69,11 +69,6 @@ public class copyBook {
         pfand = null;
     }
 
-    public String aktuelleId(){
-        aktuelleId++;
-        String s = String.valueOf(aktuelleId);
-        return s;
-    }
 
     public void setLent() {
         if(student == null) {
@@ -90,8 +85,7 @@ public class copyBook {
     public void setLentdate(){
 
         LocalDate ld = LocalDate.now();
-        String date = ld.toString();
-        lentDate = date;
+        lentDate = ld.toString();
     }
 
     public void setLentduration(String lentduration) {
@@ -99,8 +93,7 @@ public class copyBook {
         int zahl = Integer.parseInt(lentduration);
         LocalDate date = LocalDate.parse(input);
         date = date.plusDays(zahl);
-        String date2 = date.toString();
-        this.lentduration = date2;
+        this.lentduration = date.toString();
     }
 
     public void addStudent(Student student) {

@@ -126,8 +126,7 @@ public class Schluessel extends Gegenstaende {
   public void setLentdate(){
 
     LocalDate ld = LocalDate.now();
-    String date = ld.toString();
-    lentdate = date;
+      lentdate = ld.toString();
   }
 
   public void setLentduration(String lentduration) {
@@ -135,8 +134,7 @@ public class Schluessel extends Gegenstaende {
     int zahl = Integer.parseInt(lentduration);
     LocalDate date = LocalDate.parse(input);
     date = date.plusDays(zahl);
-    String date2 = date.toString();
-    this.lentduration = date2;
+      this.lentduration = date.toString();
   }
 
   @Override

@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class addcopyBook extends JDialog {
 
@@ -41,8 +39,6 @@ public class addcopyBook extends JDialog {
         buttonPanel.add(saveButton);
 
         addButton.addActionListener(e -> {
-
-
 
             if (clickCount[0] == n) {
                 JOptionPane.showMessageDialog(this, "Maximale Anzahl an Exemplaren erreicht");

@@ -5,18 +5,14 @@ public class Buch extends Gegenstaende {
 
 
     private int amount;
-    private boolean firstlent;
-    private boolean outtofstock;
     private String title;
-    private ArrayList<copyBook> amountCopys = new ArrayList<copyBook>();
+    private ArrayList<copyBook> amountCopys = new ArrayList<>();
 
   public Buch(String kommentar, String title, int amount) throws RentalSystemException {
         super(kommentar,"buch");
 
         setAmount(amount);
         setTitle(title);
-        firstlent = true;
-        outtofstock = true;
   }
 
     public void addCopy(copyBook copyBook) throws RentalSystemException {
@@ -25,7 +21,6 @@ public class Buch extends Gegenstaende {
         }
 
         amountCopys.add(copyBook);
-
     }
 
 
@@ -43,15 +38,6 @@ public class Buch extends Gegenstaende {
       }
     }
 
-    public void setFirstlent() {
-      for(copyBook copyBook : amountCopys){
-          if(!(copyBook.getLent())){
-              this.firstlent = false;
-              break;
-          }
-      }
-    }
-
     public copyBook getCopyBookByNumber(String copyNumber) {
         for (copyBook c : amountCopys) {
             if (c.getModNumber().equals(copyNumber)) {
@@ -61,22 +47,7 @@ public class Buch extends Gegenstaende {
         return null;
     }
 
-    public void setOuttofstock() {
-        for(copyBook copyBook : amountCopys){
-            if(!(copyBook.getLent())){
-                this.outtofstock = false;
-            }else {
-                this.outtofstock = true;
-            }
-            if (outtofstock) {
-                break;
-            }
-        }
-
-    }
-
-
-//getter
+    //getter
 
     public String getBezeichnung() {
         return bezeichnung;
@@ -85,41 +56,9 @@ public class Buch extends Gegenstaende {
     public int getAmount() {
       return amount;
     }
-    public boolean isFirstlent() {
-      return firstlent;
-    }
-    public boolean isOuttofstock() {
-      return outtofstock;
-    }
     public String getTitle() {
       return title;
     }
-
-
-
-    //getter des Arrays
-    public String getAmountCopys() {
-      // die stringausgabe des Arrays
-        return "Array";
-    }
-    public copyBook.Condition  getconditionArray(int index) throws RentalSystemException {
-        if(index <= amountCopys.size()) {
-            return amountCopys.get(index).getCondition();
-        } else throw new RentalSystemException("nur " + amountCopys.size() + " Eingetragen");
-    }
-
-    public Student getstudentArray(int index) throws RentalSystemException {
-        if(index <= amountCopys.size()) {
-            return amountCopys.get(index).getStudent();
-        } else throw new RentalSystemException("nur " + amountCopys.size() + " Eingetragen");
-    }
-
-    public String getPfandArray(int index) throws RentalSystemException {
-        if(index <= amountCopys.size()) {
-            return amountCopys.get(index).getPfand();
-        } else throw new RentalSystemException("nur " + amountCopys.size() + " Eingetragen");
-    }
-
 
     @Override
     public boolean equals(Object obj) {

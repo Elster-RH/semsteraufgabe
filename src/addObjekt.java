@@ -12,7 +12,7 @@ public class addObjekt extends JDialog {
 
 
     public addObjekt(Frame parent, GegenstaendeContainer container) {
-            super(parent, "Buch hinzufügen", true);
+            super(parent, "Gegenstand hinzufügen", true);
             this.container = container;
             setSize(500, 300);
 
