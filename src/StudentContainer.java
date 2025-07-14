@@ -13,8 +13,12 @@ public class StudentContainer implements  Iterable<Student>{
         return allStudents.iterator();
     }
 
-    public void addStudent(Student student) {
-        allStudents.add(student);
+    public void addStudent(Student student) throws RentalSystemException.EmailAlreadyExists {
+        if(checkeMail(student.geteMail())){
+            throw new RentalSystemException.EmailAlreadyExists();
+        }else {
+            allStudents.add(student);
+        }
     }
 
 
@@ -28,6 +32,17 @@ public class StudentContainer implements  Iterable<Student>{
             }
         }
         return false;
+    }
+
+    public boolean checkeMail(String email) {
+
+        for (Student s: allStudents) {
+            if (s.geteMail().equalsIgnoreCase(email)) {
+                return true;
+            }
+        }
+        return false;
+
     }
 
     public void printAllStudents() {

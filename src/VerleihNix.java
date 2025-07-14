@@ -115,7 +115,11 @@ public class VerleihNix extends JFrame {
                     } catch (RentalSystemException e) {
                         throw new RuntimeException(e);
                     }
-                    container.addStudent(student);
+                    try{
+                        container.addStudent(student);
+                    } catch (RentalSystemException.EmailAlreadyExists e) {
+                        throw new RuntimeException(e);
+                    }
                 }
 
             }

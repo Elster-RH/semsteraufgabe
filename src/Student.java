@@ -37,6 +37,8 @@ public class Student {
         return eMail;
     }
     public void seteMail(String eMail) throws RentalSystemException.InvalidFormatEmail{
+
+
         if (!eMail.contains("@")) {
             throw new RentalSystemException.InvalidFormatEmail();
         }
@@ -80,6 +82,8 @@ public class Student {
         Student other = (Student) obj;
         return this.geteMail() == other.geteMail();
     }
+
+
 
 }
 
