@@ -44,8 +44,8 @@ public class addStudent extends JDialog {
         JLabel postalCodeLabel = new JLabel("PLZ:");
         JLabel cityLabel = new JLabel("Stadt:");
 
-        JTextArea hinweisarea = new JTextArea(" Zum Entfernen eines Studenten \n bitte nur dessen Email eingeben\n und denn entsprechenden Button drücken");
-        JTextArea hinweisarea2 = new JTextArea();
+        JTextArea hinweisarea = new JTextArea(" Zum Entfernen eines Studenten \n und denn entsprechenden Button drücken");
+        JTextArea hinweisarea2 = new JTextArea("bitte nur dessen Email eingeben");
 
         studentPanel.add(hinweisarea);
         studentPanel.add(hinweisarea2);
