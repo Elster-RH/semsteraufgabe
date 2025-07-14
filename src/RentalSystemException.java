@@ -1,4 +1,6 @@
 public class RentalSystemException extends Exception {
+
+
     public RentalSystemException(String message) {
         super(message);
     }

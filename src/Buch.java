@@ -91,6 +91,9 @@ public class Buch extends Gegenstaende {
     public boolean isOuttofstock() {
       return outtofstock;
     }
+    public String getTitle() {
+      return title;
+    }
 
 
 

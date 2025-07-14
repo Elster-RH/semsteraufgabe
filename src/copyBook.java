@@ -50,15 +50,16 @@ public class copyBook {
 
     }
 
-    public boolean checklentdate() throws RentalSystemException.toLate {
-        LocalDate ld = LocalDate.parse(lentDate);
+    public boolean checklentdate() {
+        LocalDate ld = LocalDate.parse(lentduration);
         LocalDate bd = LocalDate.now();
-        if (ld.isBefore(bd)) {
+        if (bd.isAfter(ld)) {
             return true;
-        }else {
-            throw new RentalSystemException.toLate();
         }
+        return false;
+
     }
+
 
     public void bringBack() {
         student = null;
@@ -122,40 +123,49 @@ public class copyBook {
         this.condition = condition;
 
     }
-@Override
-public String toString(){
-       StringBuilder copies = new StringBuilder();
-       if (student != null) {
-           copies.append(modNumber)
-                   .append(";")
-                   .append(student.geteMail())
-                   .append(";")
-                   .append(lentDate)
-                   .append(";")
-                   .append(lentduration)
-                   .append(";")
-                   .append(pfand)
-                   .append(";")
-                   .append(condition)
-                   .append(";")
-                   .append("\n");
-       }else {
-           copies.append(modNumber)
-                   .append(";")
-                   .append(student)
-                   .append(";")
-                   .append(lentDate)
-                   .append(";")
-                   .append(lentduration)
-                   .append(";")
-                   .append(pfand)
-                   .append(";")
-                   .append(condition)
-                   .append(";")
-                   .append("\n");
-       }
 
-        return copies.toString();
+    public String getLentduration() {
+        return lentduration;
+    }
+
+    public String getLentDate() {
+        return lentDate;
+    }
+
+    @Override
+    public String toString(){
+            StringBuilder copies = new StringBuilder();
+            if (student != null) {
+                copies.append(modNumber)
+                        .append(";")
+                        .append(student.geteMail())
+                        .append(";")
+                        .append(lentDate)
+                        .append(";")
+                        .append(lentduration)
+                        .append(";")
+                        .append(pfand)
+                        .append(";")
+                        .append(condition)
+                        .append(";")
+                        .append("\n");
+            }else {
+                copies.append(modNumber)
+                        .append(";")
+                        .append(student)
+                        .append(";")
+                        .append(lentDate)
+                        .append(";")
+                        .append(lentduration)
+                        .append(";")
+                        .append(pfand)
+                        .append(";")
+                        .append(condition)
+                        .append(";")
+                        .append("\n");
+            }
+
+            return copies.toString();
 }
 
 

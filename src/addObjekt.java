@@ -1,10 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class addObjekt extends JDialog {
-
 
         private GegenstaendeContainer container;
         private Buch buch;
@@ -29,11 +26,6 @@ public class addObjekt extends JDialog {
             JLabel titleLabel= new JLabel("Title:");
             JLabel amountLabel= new JLabel("Anzahl:");
 
-
-
-
-
-
             objektPanel.setLayout(new GridLayout(2, 2));
             buchPanel.add(kommentarLabel);
             kommentar = new JTextField();
@@ -45,14 +37,10 @@ public class addObjekt extends JDialog {
             amount = new JTextField();
             buchPanel.add(amount);
 
-
-
             JButton addButton = new JButton("Neues Buch anlegen");
-            JButton removeButton = new JButton("Test");
             JButton cancelButton = new JButton("Schließen");
 
             buttonPanel.add(addButton);
-            buttonPanel.add(removeButton);
             buttonPanel.add(cancelButton);
 
                 cancelButton.addActionListener(e -> {
@@ -67,8 +55,6 @@ public class addObjekt extends JDialog {
                     } catch (RentalSystemException ex) {
                         throw new RuntimeException(ex);
                     }
-
-
 
                         addcopyBook objekt = new addcopyBook(this, buch, container, a);
                         objekt.setVisible(true);

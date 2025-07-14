@@ -61,6 +61,17 @@ public class Schluessel extends Gegenstaende {
     return schliesst;
   }
 
+  public String getPfand() {
+    return pfand;
+  }
+
+  public String getLentdate() {
+    return lentdate;
+  }
+  public String getLentduration() {
+    return lentduration;
+  }
+
   public void setPfand(String pfand) throws RentalSystemException.EmptyField {
     if (pfand == null || pfand.isEmpty()) {
       throw new RentalSystemException.EmptyField();
@@ -68,14 +79,13 @@ public class Schluessel extends Gegenstaende {
     this.pfand = pfand;
   }
 
-  public boolean checklentdate() throws RentalSystemException.toLate {
-    LocalDate ld = LocalDate.parse(lentdate);
+  public boolean checklentdate() {
+    LocalDate ld = LocalDate.parse(lentduration);
     LocalDate bd = LocalDate.now();
-    if (bd.isBefore(ld)) {
+    if (bd.isAfter(ld)) {
       return true;
-    }else {
-      throw new RentalSystemException.toLate();
     }
+    return false;
   }
 
   public void bringBack() {
@@ -100,6 +110,10 @@ public class Schluessel extends Gegenstaende {
     } else {
       throw new RentalSystemException.NotAvailable();
     }
+  }
+
+  public boolean checkLent() {
+    return lent;
   }
 
 

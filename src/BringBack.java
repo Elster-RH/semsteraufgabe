@@ -48,9 +48,10 @@ public class BringBack extends JDialog {
 
 
             if(key != null ) {
+                if(!key.checklentdate())
                 try {
-                    key.checklentdate();
-                }catch (RentalSystemException e1) {
+                    throw new RentalSystemException.toLate();
+                }catch (RentalSystemException.toLate  e1) {
                     JOptionPane.showMessageDialog(this,e1.getMessage());
                 }
 
@@ -59,11 +60,12 @@ public class BringBack extends JDialog {
 
             if (buch != null) {
                 copyBook = buch.getCopyBookByNumber(copyId.getText());
-                try {
-                    copyBook.checklentdate();
-                }catch (RentalSystemException e1) {
-                    JOptionPane.showMessageDialog(this,e1.getMessage());
-                }
+                if(!copyBook.checklentdate())
+                    try {
+                        throw new RentalSystemException.toLate();
+                    }catch (RentalSystemException.toLate  e1) {
+                        JOptionPane.showMessageDialog(this,e1.getMessage());
+                    }
 
                 copyBook.bringBack();
             }

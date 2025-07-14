@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.Iterator;
 
 public class VerleihNix extends JFrame {
 
@@ -12,11 +13,13 @@ public class VerleihNix extends JFrame {
         JPanel buttonPanel = new JPanel();
         JPanel northPanel = new JPanel();
         JPanel centerPanel = new JPanel();
+        JPanel eastPanel = new JPanel();
 
         northPanel.setLayout(new FlowLayout());
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        eastPanel.setLayout(new GridLayout(2,1));
 
-        JTextArea hinweisarea = new JTextArea("Willkommen bei Verleihnix ihrem Experten \n wenn es ums Verleihen geht.\nUms Wiederbekommen müssen Sie sich selbst kümmern.");
+        JTextArea hinweisarea = new JTextArea("Willkommen bei Verleihnix ihrem Experten wenn  \nes ums Verleihen geht. Ums Wiederbekommen \nmüssen Sie sich selbst kümmern.");
 
 
         JButton studentbutton = new JButton("Neuen Studenten anlegen");
@@ -26,6 +29,10 @@ public class VerleihNix extends JFrame {
         JButton lentkeybutton = new JButton("Schlüssel verleihen");
         JButton lentBookbutton = new JButton("Buch verleihen");
         JButton backButton = new JButton("Zurückgeben");
+        JButton printButton = new JButton("Erstelle Liste Ausgeliehene");
+        JButton printUButton = new JButton("Erstelle Liste Überzogene");
+        eastPanel.add(printButton);
+        eastPanel.add(printUButton);
         buttonPanel.add(studentbutton);
         buttonPanel.add(keyButton);
         buttonPanel.add(bookbutton);
@@ -63,6 +70,12 @@ public class VerleihNix extends JFrame {
             back.setVisible(true);
 
         });
+        printButton.addActionListener(e -> {
+            printall(objContainer);
+        });
+        printUButton.addActionListener(e -> {
+            ToLate(objContainer);
+        });
         centerPanel.setLayout(new FlowLayout());
         centerPanel.add(hinweisarea);
 
@@ -70,11 +83,123 @@ public class VerleihNix extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
         add(northPanel, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
+        add(eastPanel, BorderLayout.EAST);
 
         pack();
 
 
         setVisible(true);
+
+    }
+
+    public void printall(GegenstaendeContainer objContainer) {
+
+        try(FileWriter wirter = new FileWriter("Alle_ausgeliehen_Gegenstaende.csv")) {
+
+            StringBuilder be = new StringBuilder();
+
+            for (Iterator<Gegenstaende> it = objContainer.iterator(); it.hasNext(); ) {
+
+                Gegenstaende g = it.next();
+                if(g.getBezeichnung().contains("schluesse")){
+                    Schluessel key = (Schluessel) g;
+                    if(!(key.checkLent())){
+                        be.append("Bezeichnung:").append(key.getBezeichnung()).append("\n")
+                                .append("Angefügter Kommentar:").append(key.getkommentar()).append("\n")
+                                .append("Schliesst:").append(key.getSchliesst()).append("\n")
+                                .append("Hinterlegtes Pfand:").append(key.getPfand()).append("\n")
+                                .append("Ausgeliehen seit:").append(key.getLentdate()).append("\n")
+                                .append("Ausgeliehen bis:").append(key.getLentduration()).append("\n");
+
+                        wirter.write(be.toString());
+                    }
+                }
+                if(g.getBezeichnung().contains("buch")){
+                    Buch buch = (Buch) g;
+                    copyBook copy;
+                    int n = buch.getAmount();
+                    for (int i = 1; i <= n; i++) {
+                        String s = Integer.toString(i);
+                        copy = buch.getCopyBookByNumber(s);
+
+
+                        if (!(copy.getLent())) {
+                            be.append("Bezeichnung:").append(buch.getBezeichnung()).append("\n")
+                                    .append("Angefügter Kommentar:").append(buch.getkommentar()).append("\n")
+                                    .append("Titel:").append(buch.getTitle()).append("\n")
+                                    .append("Exemplar Nummer").append(copy.getModNumber()).append("\n")
+                                    .append("Hinterlegtes Pfand:").append(copy.getPfand()).append("\n")
+                                    .append("Ausgeliehen seit:").append(copy.getLentDate()).append("\n")
+                                    .append("Ausgeliehen bis:").append(copy.getLentduration()).append("\n");
+
+                            wirter.write(be.toString());
+                        }
+                    }
+                }
+
+            }
+        } catch(IOException ex) {
+            ex.printStackTrace();
+        }
+
+
+    }
+
+    public void ToLate(GegenstaendeContainer objContainer) {
+
+        try(FileWriter wirter = new FileWriter("Alle_ausgeliehen_und_Überzogene_Gegenstaende.csv")) {
+
+            StringBuilder be = new StringBuilder();
+
+            for (Iterator<Gegenstaende> it = objContainer.iterator(); it.hasNext(); ) {
+
+                Gegenstaende g = it.next();
+                if(g.getBezeichnung().contains("schluesse")){
+                    Schluessel key = (Schluessel) g;
+                    if(!(key.checkLent())){
+
+                        if(!(key.checklentdate()))
+                            be.append("ÜBERZOGEN!!!").append("\n")
+                                    .append("Bezeichnung:").append(key.getBezeichnung()).append("\n")
+                                    .append("Angefügter Kommentar:").append(key.getkommentar()).append("\n")
+                                    .append("Schliesst:").append(key.getSchliesst()).append("\n")
+                                    .append("Hinterlegtes Pfand:").append(key.getPfand()).append("\n")
+                                    .append("Ausgeliehen seit:").append(key.getLentdate()).append("\n")
+                                    .append("Ausgeliehen bis:").append(key.getLentduration()).append("\n");
+
+                        wirter.write(be.toString());
+                    }
+                }
+                if(g.getBezeichnung().contains("buch")){
+                    Buch buch = (Buch) g;
+                    copyBook copy;
+                    int n = buch.getAmount();
+                    for (int i = 1; i <= n; i++) {
+                        String s = Integer.toString(i);
+                        copy = buch.getCopyBookByNumber(s);
+
+
+                        if (!(copy.getLent())) {
+                            if(!(copy.checklentdate()))
+                                be.append("ÜBERZOGEN!!!").append("\n")
+                                        .append("Bezeichnung:").append(buch.getBezeichnung()).append("\n")
+                                        .append("Angefügter Kommentar:").append(buch.getkommentar()).append("\n")
+                                        .append("Titel:").append(buch.getTitle()).append("\n")
+                                        .append("Exemplar Nummer").append(copy.getModNumber()).append("\n")
+                                        .append("Hinterlegtes Pfand:").append(copy.getPfand()).append("\n")
+                                        .append("Ausgeliehen seit:").append(copy.getLentDate()).append("\n")
+                                        .append("Ausgeliehen bis:").append(copy.getLentduration()).append("\n");
+
+                            wirter.write(be.toString());
+                        }
+                    }
+                }
+
+            }
+        } catch(IOException ex) {
+            ex.printStackTrace();
+        }
+
 
     }
 
@@ -232,37 +357,7 @@ public class VerleihNix extends JFrame {
                             } catch (RentalSystemException e) {
                                 throw new RuntimeException(e);
                             }
-                    }
-
-                        //andere Methode
-                    /*for(int i = 5; i < 5 + (amount * 6); i = i + 6){
-                        if(data[i + 1].contains("null")) {
-                            String modNum = data[i];
-                            String lentdate = data[i + 2];
-                            String lentduration = data[i + 3];
-                            String pfand = data[i + 4];
-                            copyBook.Condition cond = copyBook.Condition.valueOf(data[i + 5]);
-
-                            try{
-                                copy = new copyBook(modNum, lentdate, lentduration, pfand, cond);
-                            } catch (RentalSystemException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }else {
-                            String modNum = data[i];
-                            String eMail = data[i + 1];
-                            String lentdate = data[i + 2];
-                            String lentduration = data[i + 3];
-                            String pfand = data[i + 4];
-                            copyBook.Condition cond = copyBook.Condition.valueOf(data[i + 5]);
-                            Student student = container.getStudent(eMail);
-
-                            try{
-                                copy = new copyBook(modNum, student, lentdate, lentduration, pfand, cond);
-                            } catch (RentalSystemException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }*/
+                        }
                         try {
                             buch.addCopy(copy);
                         }catch (RentalSystemException e) {
@@ -272,13 +367,8 @@ public class VerleihNix extends JFrame {
 
                     objContainer.addGegenstand(buch);
                 }
-
-
-
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        }catch (IOException e) {
             throw new RuntimeException(e);
         }
 
