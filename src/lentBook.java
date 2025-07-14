@@ -26,7 +26,7 @@ public class lentBook extends JDialog  {
         JPanel keyPanel = new JPanel();
         keyPanel.setLayout(new GridLayout(5, 2));
 
-        JLabel bookIdLabel = new JLabel("Buch ID:");
+        JLabel bookIdLabel = new JLabel("ID:");
         JLabel pfandLabel = new JLabel("Pfand:");
         JLabel lentdurationLabel = new JLabel("Ausleihzeit in Tagen:");
         JLabel copyidLabel = new JLabel("Exemplar Nummer:");
