@@ -59,6 +59,8 @@ public class VerleihNix extends JFrame {
             lentBook.setVisible(true);
         });
         backButton.addActionListener(e -> {
+            BringBack back = new BringBack(this, objContainer);
+            back.setVisible(true);
 
         });
         centerPanel.setLayout(new FlowLayout());

@@ -1,29 +1,36 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Iterator;
 
 public class BringBack extends JDialog {
 
 
-    public BringBack(Frame parent,GegenstaendeContainer objContainer, StudentContainer container) {
+    private JTextField copyId = new JTextField();
+    private JTextField id = new JTextField();
+
+
+    public BringBack(Frame parent,GegenstaendeContainer objContainer) {
         super(parent,"Rückgabe", true);
-        setSize(200,200);
+        setSize(600,600);
 
         JPanel textPanel = new JPanel();
         JPanel buttonPanel = new JPanel();
 
+        textPanel.setLayout(new GridLayout(2,2));
+
         JLabel idLabel = new JLabel("ID:");
         textPanel.add(idLabel);
-        JTextField id = new JTextField();
         textPanel.add(id);
         JLabel expLabel = new JLabel("Exempar Nummer:");
         textPanel.add(expLabel);
-        JTextField expId = new JTextField();
-        textPanel.add(expId);
+        textPanel.add(copyId);
 
 
 
-        JButton okButton = new JButton();
-        JButton cancelButton = new JButton();
+        JButton okButton = new JButton("Zurückgeben");
+        JButton cancelButton = new JButton("Zurück");
 
         buttonPanel.add(okButton);
         buttonPanel.add(cancelButton);
@@ -39,11 +46,57 @@ public class BringBack extends JDialog {
 
 
 
-            if(key != null ) {
 
+            if(key != null ) {
+                try {
+                    key.checklentdate();
+                }catch (RentalSystemException e1) {
+                    JOptionPane.showMessageDialog(this,e1.getMessage());
+                }
+
+                key.bringBack();
             }
+
+            if (buch != null) {
+                copyBook = buch.getCopyBookByNumber(copyId.getText());
+                try {
+                    copyBook.checklentdate();
+                }catch (RentalSystemException e1) {
+                    JOptionPane.showMessageDialog(this,e1.getMessage());
+                }
+
+                copyBook.bringBack();
+            }
+
+            try(FileWriter wirter = new FileWriter("Buch.csv")) {
+
+                for (Iterator<Gegenstaende> it = objContainer.iterator(); it.hasNext(); ) {
+
+                    Gegenstaende g = it.next();
+                    wirter.write(g.toString());
+                }
+            } catch(IOException ex) {
+                ex.printStackTrace();
+            }
+
+            clear();
 
         });
 
+        cancelButton.addActionListener(e -> {
+            dispose();
+        });
+
+        add(textPanel,BorderLayout.NORTH);
+        add(buttonPanel,BorderLayout.SOUTH);
+
+        pack();
+
+    }
+
+    public void clear(){
+
+        id.setText("");
+        copyId.setText("");
     }
 }

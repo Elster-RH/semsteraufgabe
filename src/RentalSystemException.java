@@ -42,6 +42,10 @@ public class RentalSystemException extends Exception {
     static class WrongInput extends RentalSystemException {
         public WrongInput() {super("Falsche Eingabe");}
     }
+
+    static class toLate extends RentalSystemException {
+        public toLate() {super("Ausleihdauer Überzogen");}
+    }
 }
 
 

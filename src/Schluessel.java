@@ -68,13 +68,22 @@ public class Schluessel extends Gegenstaende {
     this.pfand = pfand;
   }
 
-  public boolean checklentdate() {
+  public boolean checklentdate() throws RentalSystemException.toLate {
     LocalDate ld = LocalDate.parse(lentdate);
     LocalDate bd = LocalDate.now();
-    if (ld.isBefore(bd)) {
+    if (bd.isBefore(ld)) {
       return true;
+    }else {
+      throw new RentalSystemException.toLate();
     }
-    return false;
+  }
+
+  public void bringBack() {
+    student = null;
+    setLent();
+    lentdate = null;
+    lentduration = null;
+    pfand = null;
   }
 
   public void setLent() {

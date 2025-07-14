@@ -50,6 +50,24 @@ public class copyBook {
 
     }
 
+    public boolean checklentdate() throws RentalSystemException.toLate {
+        LocalDate ld = LocalDate.parse(lentDate);
+        LocalDate bd = LocalDate.now();
+        if (ld.isBefore(bd)) {
+            return true;
+        }else {
+            throw new RentalSystemException.toLate();
+        }
+    }
+
+    public void bringBack() {
+        student = null;
+        setLent();
+        lentDate = null;
+        lentduration = null;
+        pfand = null;
+    }
+
     public String aktuelleId(){
         aktuelleId++;
         String s = String.valueOf(aktuelleId);

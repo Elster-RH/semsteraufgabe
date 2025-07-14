@@ -1,8 +1,8 @@
 schluessel;1;Gelb;Stargate;null;null;null;null;
 schluessel;2;Rot;Atlantis;null;null;null;null;
-schluessel;3;Blau;Auto;daniel@de.de;Erstgeborener;2025-07-10;2025-07-12;
+schluessel;3;Blau;Auto;null;null;null;null;
 buch;4;Fantasy;der kleine Hobbit;2;
-1;daniel@de.de;2025-07-13;2025-07-15;Schluessel;VERY_GOOD;
+1;null;null;null;null;VERY_GOOD;
 2;null;null;null;null;LIKE_NEW;
 buch;5;Fantasy;Pipi Langstrupf;1;
 1;null;null;null;null;GOOD;
