@@ -13,23 +13,27 @@ public class Student {
 
         if (firstName == null || firstName.isEmpty()) {
             throw new RentalSystemException.EmptyField();
+        } else {
+            setFirstName(firstName);
         }
-        this.firstName = firstName;
 
         if (lastName == null || lastName.isEmpty()) {
             throw new RentalSystemException.EmptyField();
+        } else {
+            setLastName(lastName);
         }
-        this.lastName= lastName;
 
         if (address == null ) {
             throw new RentalSystemException.EmptyField();
+        } else {
+            setAddress(address);
         }
-        this.address = address;
 
         if (phoneNumber == null || phoneNumber.isEmpty()) {
             throw new RentalSystemException.EmptyField();
+        } else {
+            setPhoneNumber(phoneNumber);
         }
-        this.phoneNumber = phoneNumber;
 
     }
 
