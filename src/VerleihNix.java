@@ -60,7 +60,7 @@ public class VerleihNix extends JFrame {
         });
         backButton.addActionListener(e -> {
 
-        })
+        });
         centerPanel.setLayout(new FlowLayout());
         centerPanel.add(hinweisarea);
 

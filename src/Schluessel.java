@@ -71,7 +71,7 @@ public class Schluessel extends Gegenstaende {
   public boolean checklentdate() {
     LocalDate ld = LocalDate.parse(lentdate);
     LocalDate bd = LocalDate.now();
-
+    return false;
   }
 
   public void setLent() {
