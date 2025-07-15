@@ -115,7 +115,7 @@ public class VerleihNix extends JFrame {
                         wirter.write(be.toString());
                     }
                 }
-                if(g.getBezeichnung().contains("buch")){
+                if(g.getBezeichnung().contains("gegenstand")){
                     Buch buch = (Buch) g;
                     copyBook copy;
                     int n = buch.getAmount();
@@ -156,7 +156,7 @@ public class VerleihNix extends JFrame {
             for (Iterator<Gegenstaende> it = objContainer.iterator(); it.hasNext(); ) {
 
                 Gegenstaende g = it.next();
-                if(g.getBezeichnung().contains("schluesse")){
+                if(g.getBezeichnung().contains("schluessel")){
                     Schluessel key = (Schluessel) g;
                     if(!(key.checkLent())){
 
@@ -173,7 +173,7 @@ public class VerleihNix extends JFrame {
                         wirter.write(be.toString());
                     }
                 }
-                if(g.getBezeichnung().contains("buch")){
+                if(g.getBezeichnung().contains("gegenstand")){
                     Buch buch = (Buch) g;
                     copyBook copy;
                     int n = buch.getAmount();
@@ -258,7 +258,7 @@ public class VerleihNix extends JFrame {
             e.printStackTrace();
         }
 
-        try (BufferedReader in2 = new BufferedReader(new FileReader("Buch.csv"))) {
+        try (BufferedReader in2 = new BufferedReader(new FileReader("Gegenstaende.csv"))) {
             String zeile;
 
 
@@ -307,7 +307,7 @@ public class VerleihNix extends JFrame {
 
 
 
-                }else if (data[0].contains("buch")) {
+                }else if (data[0].contains("gegenstand")) {
 
                     String comm = data[2];
                     String title = data[3];

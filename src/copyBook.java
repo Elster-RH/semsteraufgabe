@@ -2,8 +2,6 @@ import java.time.LocalDate;
 
 public class copyBook {
 
-    private static int aktuelleId = 0;
-
     private String modNumber;
     private Student student;
     private String lentduration;
@@ -11,7 +9,7 @@ public class copyBook {
     private boolean lent;
     private String lentDate;
     public enum Condition {
-        POOR, FAIR, GOOD, VERY_GOOD, LIKE_NEW
+        SCHLECHT, GEBRAUCHT, GUT, SEHR_GUT, WIE_NEU
     }
     Condition condition;
 

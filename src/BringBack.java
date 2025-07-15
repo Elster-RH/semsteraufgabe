@@ -48,29 +48,34 @@ public class BringBack extends JDialog {
 
 
             if(key != null ) {
-                if(!key.checklentdate())
+                if(key.checklentdate())
                     try {
                         throw new RentalSystemException.toLate();
                     }catch (RentalSystemException.toLate  e1) {
                         JOptionPane.showMessageDialog(this,e1.getMessage());
-                    }
+                    }else {
+                    JOptionPane.showMessageDialog(this, "Zurückgeben");
+                }
 
                 key.bringBack();
             }
 
             if (buch != null) {
                 copyBook = buch.getCopyBookByNumber(copyId.getText());
-                if(!copyBook.checklentdate())
+                if(copyBook.checklentdate())
                     try {
                         throw new RentalSystemException.toLate();
                     }catch (RentalSystemException.toLate  e1) {
                         JOptionPane.showMessageDialog(this,e1.getMessage());
+                    }else {
+
+                    JOptionPane.showMessageDialog(this, "Zurückgeben");
                     }
 
                 copyBook.bringBack();
             }
 
-            try(FileWriter wirter = new FileWriter("Buch.csv")) {
+            try(FileWriter wirter = new FileWriter("Gegenstaende.csv")) {
 
                 for (Iterator<Gegenstaende> it = objContainer.iterator(); it.hasNext(); ) {
 

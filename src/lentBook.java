@@ -74,7 +74,7 @@ public class lentBook extends JDialog  {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
             }
 
-            try(FileWriter wirter = new FileWriter("Buch.csv")) {
+            try(FileWriter wirter = new FileWriter("Gegenstaende.csv")) {
 
                 for (Iterator<Gegenstaende> it = container.iterator(); it.hasNext(); ) {
 

@@ -37,7 +37,7 @@ public class addObjekt extends JDialog {
             amount = new JTextField();
             buchPanel.add(amount);
 
-            JButton addButton = new JButton("Neues Buch anlegen");
+            JButton addButton = new JButton("Neuen Gegenstand anlegen");
             JButton cancelButton = new JButton("Schließen");
 
             buttonPanel.add(addButton);

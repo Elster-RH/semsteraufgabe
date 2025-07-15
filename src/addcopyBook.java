@@ -27,10 +27,12 @@ public class addcopyBook extends JDialog {
 
         JButton addButton = new JButton("Exemplar hinzufügen");
         JButton saveButton = new JButton("Speichern");
+        JTextArea hinweis = new JTextArea("Bitte geben sie denn zustand der Exemplare an");
 
 
         JLabel coinditioLabel = new JLabel("Zustand:");
 
+        copyBookpanel.add(hinweis);
         copyBookpanel.add(coinditioLabel);
         JComboBox<copyBook.Condition> conditionComboBox = new JComboBox<>(copyBook.Condition.values());
         copyBookpanel.add(conditionComboBox);
@@ -68,7 +70,7 @@ public class addcopyBook extends JDialog {
 
             container.addGegenstand(buch);
 
-            try(FileWriter wirter = new FileWriter("Buch.csv")) {
+            try(FileWriter wirter = new FileWriter("Gegenstaende.csv")) {
 
                 for (Gegenstaende g : container) {
 

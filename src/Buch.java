@@ -9,7 +9,7 @@ public class Buch extends Gegenstaende {
     private ArrayList<copyBook> amountCopys = new ArrayList<>();
 
   public Buch(String kommentar, String title, int amount) throws RentalSystemException {
-        super(kommentar,"buch");
+        super(kommentar,"gegenstand");
 
         setAmount(amount);
         setTitle(title);

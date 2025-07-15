@@ -77,7 +77,7 @@ public class addSchluessel extends JDialog {
 
         container.addGegenstand(key);                                             // Fügt schlüssel zu container hinzu
 
-        try(FileWriter wirter = new FileWriter("Buch.csv", true)) {  // Methode zum hinzufügen des angelegten
+        try(FileWriter wirter = new FileWriter("Gegenstaende.csv", true)) {  // Methode zum hinzufügen des angelegten
                                                                                      // Schlüssels zu der CSV Datei. arbeitet mit der
             wirter.write(key.toString());                                            // toString-Methode des Objekts
 
