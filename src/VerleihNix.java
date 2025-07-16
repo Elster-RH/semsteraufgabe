@@ -72,9 +72,11 @@ public class VerleihNix extends JFrame {
         });
         printButton.addActionListener(e -> {
             printall(objContainer);
+            AnzeigeListeAusgeliehen();
         });
         printUButton.addActionListener(e -> {
             ToLate(objContainer);
+            AnzeigeListeUeberzogene();
         });
         centerPanel.setLayout(new FlowLayout());
         centerPanel.add(hinweisarea);
@@ -378,5 +380,45 @@ public class VerleihNix extends JFrame {
 
         new VerleihNix(container, objContainer);
 
+    }
+    public void AnzeigeListeAusgeliehen() {
+        StringBuilder inhalt = new StringBuilder();
+
+        try (BufferedReader br = new BufferedReader(new FileReader("Alle_ausgeliehen_Gegenstaende.csv"))) {
+            String zeile;
+            while ((zeile = br.readLine()) != null) {
+                inhalt.append(zeile).append("\n");
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Fehler beim Lesen der Datei: " + e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JTextArea textArea = new JTextArea(inhalt.toString());
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(600, 400));
+
+        JOptionPane.showMessageDialog(this, scrollPane, "Alle ausgeliehenen Gegenstände", JOptionPane.INFORMATION_MESSAGE);
+    }
+    public void AnzeigeListeUeberzogene() {
+        StringBuilder inhalt = new StringBuilder();
+
+        try (BufferedReader br = new BufferedReader(new FileReader("Alle_ausgeliehen_und_Überzogene_Gegenstaende.csv"))) {
+            String zeile;
+            while ((zeile = br.readLine()) != null) {
+                inhalt.append(zeile).append("\n");
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Fehler beim Lesen der Datei: " + e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JTextArea textArea = new JTextArea(inhalt.toString());
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(600, 400));
+
+        JOptionPane.showMessageDialog(this, scrollPane, "Alle_ausgeliehen_und_Überzogene_Gegenstaende.csv", JOptionPane.INFORMATION_MESSAGE);
     }
 }
