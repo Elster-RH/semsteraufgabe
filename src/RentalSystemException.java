@@ -1,11 +1,13 @@
-public class RentalSystemException extends Exception {
-
+public class RentalSystemException extends Exception {                                                      // Unterklasee von Exception
 
     public RentalSystemException(String message) {
         super(message);
     }
 
-    static class EmailAlreadyExists extends RentalSystemException {
+    // Hier werden mehrere spezifische Exceptions erstellt, damit in den anderen Programmabschinitten
+    // nicht jede Exception eigens neu geschrieben werden muss.
+
+    static class EmailAlreadyExists extends RentalSystemException {                                         // Unterklasse von RentalSystemExceptio
         public EmailAlreadyExists() {
             super("Email bereits vergeben");
         }
@@ -19,19 +21,13 @@ public class RentalSystemException extends Exception {
 
     static class EmptyField extends RentalSystemException {
         public EmptyField() {
-            super("Pflichtfeld, Eingabe erforderlich");                  // für alle leeren Felder
+            super("Pflichtfeld, Eingabe erforderlich");                                                      // für alle leeren Eingabefelder in der VerleiNIx
         }
     }
 
     static class EMailNotFound extends RentalSystemException {
         public EMailNotFound() {
             super("E-Mail nicht gefunden.");
-        }
-    }
-
-    static class IdNotFound extends RentalSystemException {
-        public IdNotFound() {
-            super("ID nicht gefunden.");
         }
     }
 
@@ -45,8 +41,8 @@ public class RentalSystemException extends Exception {
         public WrongInput() {super("Falsche Eingabe");}
     }
 
-    static class toLate extends RentalSystemException {
-        public toLate() {super("Ausleihdauer Überzogen");}
+    static class ToLate extends RentalSystemException {
+        public ToLate() {super("Ausleihdauer Überzogen");}
     }
 }
 

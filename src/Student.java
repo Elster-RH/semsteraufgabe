@@ -1,7 +1,7 @@
 
 public class Student {
 
-    private String eMail;                      // wird als Eindeutige ID verwendet, d.h. wir nur  ein mal vergeben
+    private String eMail;                                                   // wird als Eindeutige ID verwendet, d.h. wir nur  ein mal vergeben
     private String firstName;
     private String lastName;
     private Address address;
@@ -9,7 +9,7 @@ public class Student {
 
     public Student (String eMail, String firstName, String lastName, String phoneNumber, Address address) throws RentalSystemException {
 
-        seteMail(eMail);     //überprüfen ob es die email schon gibt (equil-Methode)
+        seteMail(eMail);                                                    //überprüfen ob es die email schon gibt (equil-Methode)
 
         if (firstName == null || firstName.isEmpty()) {
             throw new RentalSystemException.EmptyField();
@@ -73,13 +73,13 @@ public class Student {
         this.phoneNumber = phoneNumber;
     }
 
-    @Override
+    @Override                                                                       // Ausgabe des String
     public String toString() {
         return  address + ";" + eMail + ";" + firstName  + ";" + lastName
                  + ";" +  phoneNumber + "\n";
     }
 
-    @Override
+    @Override                                                                       // Ueberpruefen ob die Mailadresse bereits vergeben ist
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;

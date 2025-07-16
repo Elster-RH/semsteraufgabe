@@ -10,12 +10,12 @@ public class StudentContainer implements  Iterable<Student>{
     }
 
     public Iterator<Student> iterator() {
-        return allStudents.iterator();
+        return allStudents.iterator();                                                                      // zum Durchlaufen aller Studenten für anderer Anwendungen, z.B. das Entfernen
     }
 
     public void addStudent(Student student) throws RentalSystemException.EmailAlreadyExists {
-        if(checkeMail(student.geteMail())){
-            throw new RentalSystemException.EmailAlreadyExists();
+        if(checkeMail(student.geteMail())){                                                                 // vor dem Speichern wir geprueft, ob die eMail bereits existiert
+            throw new RentalSystemException.EmailAlreadyExists();                                           // wirft spezifischen Fehler
         }else {
             allStudents.add(student);
         }
@@ -34,7 +34,7 @@ public class StudentContainer implements  Iterable<Student>{
         return false;
     }
 
-    public boolean checkeMail(String email) {
+    public boolean checkeMail(String email) {                                                               // Checkmethode für die Ueberpruefung auf gleiche eMail
 
         for (Student s: allStudents) {
             if (s.geteMail().equalsIgnoreCase(email)) {
@@ -45,13 +45,13 @@ public class StudentContainer implements  Iterable<Student>{
 
     }
 
-    public void printAllStudents() {
+    public void printAllStudents() {                                                                        // Ausgabe aller Studenten des Containers für den Programierer
         for (Student x : allStudents) {
             System.out.println(x);
         }
     }
 
-    public Student getStudent(String email) {
+    public Student getStudent(String email) {                                                               // Abfrage eines Studenten anhander der einduetigen ID (hier eMail)
 
         for(Student g : allStudents) {
 
