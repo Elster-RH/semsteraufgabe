@@ -100,33 +100,37 @@ public class VerleihNix extends JFrame {
 
             StringBuilder be = new StringBuilder();
 
-            for (Iterator<Gegenstaende> it = objContainer.iterator(); it.hasNext(); ) {
+            for (Gegenstaende g : objContainer) {
 
-                Gegenstaende g = it.next();
-                if(g.getBezeichnung().contains("schluesse")){
+                if (g.getBezeichnung().contains("schluesse")) {
                     Schluessel key = (Schluessel) g;
-                    if(!(key.checkLent())){
+                    Student student = key.getStudent();
+                    if (!(key.checkLent())) {
+                        be.setLength(0);
                         be.append("Bezeichnung:").append(key.getBezeichnung()).append("\n")
                                 .append("Angefügter Kommentar:").append(key.getkommentar()).append("\n")
                                 .append("Schliesst:").append(key.getSchliesst()).append("\n")
                                 .append("Hinterlegtes Pfand:").append(key.getPfand()).append("\n")
                                 .append("Ausgeliehen seit:").append(key.getLentdate()).append("\n")
                                 .append("Ausgeliehen bis:").append(key.getLentduration()).append("\n")
-                                .append("Ausgeliehen von:").append(key.getStudent()).append("\n");
+                                .append("Ausgeliehen von:").append(student.geteMail()).append("\n")
+                                .append("\n");
 
                         wirter.write(be.toString());
                     }
                 }
-                if(g.getBezeichnung().contains("gegenstand")){
+                if (g.getBezeichnung().contains("gegenstand")) {
                     Buch buch = (Buch) g;
                     copyBook copy;
+                    Student student;
                     int n = buch.getAmount();
                     for (int i = 1; i <= n; i++) {
                         String s = Integer.toString(i);
                         copy = buch.getCopyBookByNumber(s);
-
+                        student = copy.getStudent();
 
                         if (!(copy.getLent())) {
+                            be.setLength(0);
                             be.append("Bezeichnung:").append(buch.getBezeichnung()).append("\n")
                                     .append("Angefügter Kommentar:").append(buch.getkommentar()).append("\n")
                                     .append("Titel:").append(buch.getTitle()).append("\n")
@@ -134,7 +138,8 @@ public class VerleihNix extends JFrame {
                                     .append("Hinterlegtes Pfand:").append(copy.getPfand()).append("\n")
                                     .append("Ausgeliehen seit:").append(copy.getLentDate()).append("\n")
                                     .append("Ausgeliehen bis:").append(copy.getLentduration()).append("\n")
-                                    .append("Ausgeliehen von:").append(copy.getStudent()).append("\n");
+                                    .append("Ausgeliehen von:").append(student.geteMail()).append("\n")
+                                    .append("\n");
 
                             wirter.write(be.toString());
                         }
@@ -145,8 +150,6 @@ public class VerleihNix extends JFrame {
         } catch(IOException ex) {
             ex.printStackTrace();
         }
-
-
     }
 
     public void ToLate(GegenstaendeContainer objContainer) {
@@ -155,14 +158,15 @@ public class VerleihNix extends JFrame {
 
             StringBuilder be = new StringBuilder();
 
-            for (Iterator<Gegenstaende> it = objContainer.iterator(); it.hasNext(); ) {
+            for (Gegenstaende g : objContainer) {
 
-                Gegenstaende g = it.next();
-                if(g.getBezeichnung().contains("schluessel")){
+                if (g.getBezeichnung().contains("schluessel")) {
                     Schluessel key = (Schluessel) g;
-                    if(!(key.checkLent())){
+                    Student student = key.getStudent();
+                    if (!(key.checkLent())) {
 
-                        if(!(key.checklentdate()))
+                        if (key.checklentdate()) {
+                            be.setLength(0);
                             be.append("ÜBERZOGEN!!!").append("\n")
                                     .append("Bezeichnung:").append(key.getBezeichnung()).append("\n")
                                     .append("Angefügter Kommentar:").append(key.getkommentar()).append("\n")
@@ -170,22 +174,27 @@ public class VerleihNix extends JFrame {
                                     .append("Hinterlegtes Pfand:").append(key.getPfand()).append("\n")
                                     .append("Ausgeliehen seit:").append(key.getLentdate()).append("\n")
                                     .append("Ausgeliehen bis:").append(key.getLentduration()).append("\n")
-                                    .append("Ausgeliehen von:").append(key.getStudent()).append("\n");
+                                    .append("Ausgeliehen von:").append(student.geteMail()).append("\n")
+                                    .append("\n");
 
-                        wirter.write(be.toString());
+                            wirter.write(be.toString());
+                        }
                     }
                 }
-                if(g.getBezeichnung().contains("gegenstand")){
+                if (g.getBezeichnung().contains("gegenstand")) {
                     Buch buch = (Buch) g;
                     copyBook copy;
+                    Student student;
                     int n = buch.getAmount();
                     for (int i = 1; i <= n; i++) {
                         String s = Integer.toString(i);
                         copy = buch.getCopyBookByNumber(s);
+                        student = copy.getStudent();
 
 
                         if (!(copy.getLent())) {
-                            if(!(copy.checklentdate()))
+                            if (copy.checklentdate()) {
+                                be.setLength(0);
                                 be.append("ÜBERZOGEN!!!").append("\n")
                                         .append("Bezeichnung:").append(buch.getBezeichnung()).append("\n")
                                         .append("Angefügter Kommentar:").append(buch.getkommentar()).append("\n")
@@ -194,9 +203,11 @@ public class VerleihNix extends JFrame {
                                         .append("Hinterlegtes Pfand:").append(copy.getPfand()).append("\n")
                                         .append("Ausgeliehen seit:").append(copy.getLentDate()).append("\n")
                                         .append("Ausgeliehen bis:").append(copy.getLentduration()).append("\n")
-                                        .append("Ausgeliehen von:").append(copy.getStudent()).append("\n");
+                                        .append("Ausgeliehen von:").append(student.geteMail()).append("\n")
+                                        .append("\n");
 
-                            wirter.write(be.toString());
+                                wirter.write(be.toString());
+                            }
                         }
                     }
                 }

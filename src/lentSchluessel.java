@@ -39,10 +39,15 @@ public class lentSchluessel extends JDialog  {
         keyPanel.add(email);
 
         JButton saveButton = new JButton("Speichern");
+        JButton showList = new JButton("Liste Schlüssel");
         JButton cancelButton = new JButton("Zurück");
 
         cancelButton.addActionListener(e -> {
             dispose();
+        });
+
+        showList.addActionListener(e -> {
+            AnzeigeListe();
         });
 
         saveButton.addActionListener(e -> {
@@ -88,6 +93,7 @@ public class lentSchluessel extends JDialog  {
         });
 
         buttonPanel.add(saveButton);
+        buttonPanel.add(showList);
         buttonPanel.add(cancelButton);
 
         add(keyPanel, BorderLayout.NORTH);
@@ -104,6 +110,24 @@ public class lentSchluessel extends JDialog  {
         pfand.setText("");
         lentduration.setText("");
         email.setText("");
+
+    }
+
+    public void AnzeigeListe() {
+        StringBuilder inhalt = new StringBuilder();
+
+        for (Gegenstaende g : container) {
+            if (g.getBezeichnung().contains("schluessel")) {
+                inhalt.append(g).append("\n");
+            }
+        }
+
+        JTextArea textArea = new JTextArea(inhalt.toString());
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(600, 400));
+
+        JOptionPane.showMessageDialog(this, scrollPane, "Alle Schlüssel", JOptionPane.INFORMATION_MESSAGE);
 
     }
 }

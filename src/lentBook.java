@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
@@ -45,9 +47,14 @@ public class lentBook extends JDialog  {
 
         JButton saveButton = new JButton("Speichern");
         JButton cancelButton = new JButton("Zurück");
+        JButton showList = new JButton("Liste Gegenstände");
 
         cancelButton.addActionListener(e -> {
             dispose();
+        });
+
+        showList.addActionListener(e -> {
+            AnzeigeListe();
         });
 
         saveButton.addActionListener(e -> {
@@ -90,6 +97,7 @@ public class lentBook extends JDialog  {
         });
 
         buttonPanel.add(saveButton);
+        buttonPanel.add(showList);
         buttonPanel.add(cancelButton);
 
         add(keyPanel, BorderLayout.NORTH);
@@ -107,6 +115,24 @@ public class lentBook extends JDialog  {
         pfand.setText("");
         lentduration.setText("");
         email.setText("");
+
+    }
+
+    public void AnzeigeListe() {
+        StringBuilder inhalt = new StringBuilder();
+
+        for (Gegenstaende g : container) {
+            if (g.getBezeichnung().contains("gegenstand")) {
+                inhalt.append(g).append("\n");
+            }
+        }
+
+            JTextArea textArea = new JTextArea(inhalt.toString());
+            textArea.setEditable(false);
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            scrollPane.setPreferredSize(new Dimension(600, 400));
+
+            JOptionPane.showMessageDialog(this, scrollPane, "Alle Gegenstände", JOptionPane.INFORMATION_MESSAGE);
 
     }
 }
